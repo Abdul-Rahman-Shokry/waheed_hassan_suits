@@ -11,8 +11,8 @@ class AppCountryCode extends StatefulWidget {
 }
 
 class _AppCountryCodeState extends State<AppCountryCode> {
-  late int selectedCountryCode;
-  final list = [10, 20, 30, 40, 50];
+  late String selectedCountryCode;
+  final list = ["+10", "+20", "+30", "+40", "+50"];
 
   @override
   void initState() {
@@ -33,15 +33,10 @@ class _AppCountryCodeState extends State<AppCountryCode> {
       ),
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 20.h),
-        child: DropdownButton<int>(
+        child: DropdownButton<String>(
           icon: Padding(
             padding: EdgeInsetsDirectional.only(start: 6.w),
-            child: AppImage(
-              "down.svg",
-              width: 10.w,
-              height: 7.h,
-              fit: BoxFit.fill,
-            ),
+            child: SizedBox.shrink(),
           ),
           value: selectedCountryCode,
           items: list
@@ -49,10 +44,11 @@ class _AppCountryCodeState extends State<AppCountryCode> {
                 (e) => DropdownMenuItem(
               value: e,
               child: Text(
-                "$e",
+                e,
                 style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  fontSize: 16.sp,
+                  fontSize: 14.sp,
+                  color: Color(0xff939393),
                 ),
               ),
             ),

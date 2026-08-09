@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/utils/helper_methods.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_button.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_input.dart';
+import 'package:waheed_hassan_suits/views/auth/register.dart';
 
 class LoginView extends StatelessWidget {
   const LoginView({super.key});
@@ -63,7 +65,9 @@ class LoginView extends StatelessWidget {
                               style: TextButton.styleFrom(
                                 padding: EdgeInsets.zero,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                goTo(page: RegisterView(), canPop: true);
+                              },
                               child: Text("إنشاء حساب جديد"),
                             ),
                           ),

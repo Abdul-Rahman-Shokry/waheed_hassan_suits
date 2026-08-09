@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:waheed_hassan_suits/views/auth/login.dart';
-import 'package:waheed_hassan_suits/views/onboarding.dart';
+import 'package:waheed_hassan_suits/views/auth/register.dart';
 
 import 'core/utils/helper_methods.dart';
 
@@ -48,6 +47,10 @@ class MyApp extends StatelessWidget {
                 borderSide: BorderSide(color: Color(0xffEAEAEA), width: 1.w),
                 borderRadius: BorderRadius.circular(12.r),
               ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xffEAEAEA), width: 1.w),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
               hintStyle: TextStyle(
                 fontSize: 14.sp,
                 fontWeight: FontWeight.w400,
@@ -59,7 +62,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: LoginView(),
+      child: RegisterView(),
     );
   }
 }
