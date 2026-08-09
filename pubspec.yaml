@@ -15,6 +15,7 @@ dependencies:
   flutter_svg: ^2.3.0
   lottie: ^3.3.3
   flutter_screenutil: ^5.9.3
+  flutter_launcher_icons: ^0.14.4
 
 
 dev_dependencies:
@@ -50,3 +51,9 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+
+flutter_launcher_icons:
+    android: "launcher_icon"
+    ios: true
+    remove_alpha_ios: true
+    image_path: "assets/images/logo.png"
