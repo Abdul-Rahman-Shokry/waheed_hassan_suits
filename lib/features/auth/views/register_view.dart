@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:waheed_hassan_suits/views/auth/login.dart';
+import 'package:waheed_hassan_suits/features/auth/views/login_view.dart';
 
-import '../../core/utils/helper_methods.dart';
-import '../../core/widgets/app_button.dart';
-import '../../core/widgets/app_image.dart';
-import '../../core/widgets/app_input.dart';
+import '../../../core/utils/helper_methods.dart';
+import '../../../core/widgets/app_button.dart';
+import '../../../core/widgets/app_image.dart';
+import '../../../core/widgets/app_input.dart';
 
 class RegisterView extends StatelessWidget {
   const RegisterView({super.key});

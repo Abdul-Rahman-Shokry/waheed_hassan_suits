@@ -22,10 +22,13 @@ void goTo({required Widget page, bool canPop = true, int? delaySeconds}) {
   }
 }
 
-void showMsg(String msg) {
-  if (msg.isNotEmpty) {
-    ScaffoldMessenger.of(
-      navKey.currentContext!,
-    ).showSnackBar(SnackBar(content: Text(msg)));
+void showMsg(String? msg, {bool isError = false}) {
+  if (msg != null && msg.isNotEmpty) {
+    ScaffoldMessenger.of(navKey.currentContext!).showSnackBar(
+      SnackBar(
+        backgroundColor: isError ? Colors.red : Colors.green,
+        content: Text(msg, maxLines: 2,),
+      ),
+    );
   }
 }

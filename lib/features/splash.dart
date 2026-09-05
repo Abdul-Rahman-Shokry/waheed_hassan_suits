@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:waheed_hassan_suits/core/utils/helper_methods.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
-import 'package:waheed_hassan_suits/views/onboarding.dart';
+import 'package:waheed_hassan_suits/features/onboarding.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});

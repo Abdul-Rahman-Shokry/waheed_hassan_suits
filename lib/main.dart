@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:waheed_hassan_suits/views/auth/register.dart';
+import 'package:waheed_hassan_suits/features/auth/views/login_view.dart';
 
+import 'core/storage/cache_helper.dart';
 import 'core/utils/helper_methods.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await CacheHelper.init();
   runApp(const MyApp());
 }
 
@@ -62,7 +65,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: RegisterView(),
+      child: LoginView(),
     );
   }
 }

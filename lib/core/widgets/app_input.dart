@@ -5,9 +5,11 @@ import 'app_country_code.dart';
 import 'app_image.dart';
 
 class AppInput extends StatefulWidget {
+  final TextEditingController? controller;
   final String? suffixIcon, hint, label;
   final bool withCountryCode, isPassword;
   final double? bottomSpace;
+  final String? Function(String?)? validator;
 
   const AppInput({
     super.key,
@@ -16,7 +18,7 @@ class AppInput extends StatefulWidget {
     this.label,
     this.withCountryCode = false,
     this.isPassword = false,
-    this.bottomSpace,
+    this.bottomSpace, this.validator, this.controller,
   });
 
   @override
@@ -36,6 +38,9 @@ class _AppInputState extends State<AppInput> {
           if (widget.withCountryCode) SizedBox(width: 6.w),
           Expanded(
             child: TextFormField(
+              textDirection: TextDirection.ltr,
+              validator: widget.validator,
+              controller: widget.controller,
               obscureText: widget.isPassword && isHidden,
               decoration: InputDecoration(
                 hintText: widget.hint,
