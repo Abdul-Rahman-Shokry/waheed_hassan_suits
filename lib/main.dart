@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/di/service_locator.dart';
 import 'package:waheed_hassan_suits/features/auth/views/login_view.dart';
 
 import 'core/storage/cache_helper.dart';
@@ -8,6 +9,7 @@ import 'core/utils/helper_methods.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await CacheHelper.init();
+  setupServiceLocator();
   runApp(const MyApp());
 }
 

@@ -19,6 +19,8 @@ dependencies:
   dio: ^5.11.1
   shared_preferences: ^2.5.5
   flutter_bloc: ^9.1.1
+  pretty_dio_logger: ^1.4.0
+  get_it: ^9.2.1
 
 
 dev_dependencies:

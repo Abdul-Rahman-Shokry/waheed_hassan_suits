@@ -1,40 +1,58 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
-import '../../features/auth/views/login_view.dart';
-import '../storage/cache_helper.dart';
-import '../utils/helper_methods.dart';
 import 'api_endpoints.dart';
+import 'app_interceptor.dart';
+import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class DioClient {
-  final _dio = Dio(
-    BaseOptions(
-      baseUrl: ApiEndpoints.baseUrl,
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-    ),
-  );
+  final Dio _dio;
 
-  DioClient();
+  DioClient()
+    : _dio = Dio(
+        BaseOptions(
+          baseUrl: ApiEndpoints.baseUrl,
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+          },
+        ),
+      ) {
+    _dio.interceptors.add(AppInterceptor());
+    // if (kDebugMode) {
+    //   _dio.interceptors.add(
+    //     LogInterceptor(
+    //       request: true,
+    //       requestHeader: true,
+    //       requestBody: true,
+    //       responseHeader: false,
+    //       responseBody: true,
+    //       error: true,
+    //     ),
+    //   );
+    // }
+    if (kDebugMode) {
+      _dio.interceptors.add(
+        PrettyDioLogger(
+          request: true,
+          requestHeader: true,
+          requestBody: true,
+          responseHeader: false,
+          responseBody: true,
+          error: true,
+          maxWidth: 40,
+          compact: true
+        ),
+      );
+    }
+  }
 
   Future<CustomResponse> postData(
-      String endpoint, {
-        Map<String, dynamic>? body,
-        bool withToken = false,
-      }) async {
-    Map<String, dynamic> requestHeaders = {};
-    if (withToken) {
-      requestHeaders["Authorization"] =
-      CacheHelper.token != null ? "Bearer ${CacheHelper.token}" : null;
-    }
-
+    String endpoint, {
+    Map<String, dynamic>? body,
+  }) async {
     try {
-      final resp = await _dio.post(
-        endpoint,
-        data: body,
-        options: Options(headers: requestHeaders),
-      );
+      final resp = await _dio.post(endpoint, data: body);
 
       if (resp.statusCode != null &&
           resp.statusCode! >= 200 &&
@@ -44,17 +62,6 @@ class DioClient {
 
       return CustomResponse(isSuccess: false);
     } on DioException catch (e) {
-      if (e.response?.statusCode == 401) {
-        CacheHelper.clearSharedPrefs();
-        goTo(page: LoginView(), canPop: false);
-
-        return CustomResponse(
-          isSuccess: false,
-          errorMsg: "Session expired. Please login again.",
-          errorStatusCode: 401,
-        );
-      }
-
       String? errorMessage;
       if (e.response?.data != null && e.response?.data is Map) {
         errorMessage = e.response?.data["message"];
@@ -73,22 +80,11 @@ class DioClient {
   }
 
   Future<CustomResponse> getData(
-      String endpoint, {
-        Map<String, dynamic>? queryParameters,
-        bool withToken = false,
-      }) async {
-    Map<String, dynamic> requestHeaders = {};
-    if (withToken) {
-      requestHeaders["Authorization"] =
-      CacheHelper.token != null ? "Bearer ${CacheHelper.token}" : null;
-    }
-
+    String endpoint, {
+    Map<String, dynamic>? queryParameters,
+  }) async {
     try {
-      final resp = await _dio.get(
-        endpoint,
-        options: Options(headers: requestHeaders),
-        queryParameters: queryParameters,
-      );
+      final resp = await _dio.get(endpoint, queryParameters: queryParameters);
 
       Map<String, dynamic> data;
       if (resp.data is List) {

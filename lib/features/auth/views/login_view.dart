@@ -13,6 +13,7 @@ import 'package:waheed_hassan_suits/core/widgets/app_input.dart';
 import 'package:waheed_hassan_suits/features/auth/repositories/auth_repository.dart';
 import 'package:waheed_hassan_suits/features/auth/views/register_view.dart';
 
+import '../../../core/di/service_locator.dart';
 import '../view_models/login_cubit.dart';
 
 part 'widgets/login_form.dart';
@@ -23,7 +24,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => LoginCubit(AuthRepository(DioClient())),
+      create: (context) => sl<LoginCubit>(),
       child: Scaffold(
         body: Directionality(
           textDirection: TextDirection.rtl,
@@ -50,11 +51,6 @@ class LoginView extends StatelessWidget {
                   listener: (context, state) {
                     if (state == DataState.success){
                       showMsg("Login Success");
-                      if (kDebugMode){
-                        final response = context.read<LoginCubit>().responseData;
-                        debugPrint("token:\n ${CacheHelper.token}");
-                        debugPrint("Message: ${response?["message"]}");
-                      }
                     } else if (state == DataState.failed){
                       final error = context.read<LoginCubit>().errorMessage;
                       showMsg(error ?? "حدث خطأ غير متوقع", isError: true);
