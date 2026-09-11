@@ -58,7 +58,7 @@ class _LoginFormState extends State<_LoginForm> {
                         padding: EdgeInsets.zero,
                       ),
                       onPressed: () {
-                        goTo(page: RegisterView(), canPop: true);
+                        context.push(AppRouter.register);
                       },
                       child: Text("إنشاء حساب جديد"),
                     ),
@@ -89,7 +89,9 @@ class _LoginFormState extends State<_LoginForm> {
               children: [
                 // AppButton(text: "هل نسيت كلمة المرور ؟",),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    context.push(AppRouter.forgotPassword);
+                  },
                   child: Text(
                     "هل نسيت كلمة المرور ؟",
                     style: TextStyle(fontSize: 14.sp),

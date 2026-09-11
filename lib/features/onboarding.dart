@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:waheed_hassan_suits/core/widgets/app_button.dart';
-import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
+import 'package:go_router/go_router.dart';
+import '../core/routing/app_router.dart';
+import '../core/storage/cache_helper.dart';
+import '../core/widgets/app_button.dart';
+import '../core/widgets/app_image.dart';
 
 class OnBoardingView extends StatelessWidget {
   const OnBoardingView({super.key});
@@ -51,7 +54,7 @@ class OnBoardingView extends StatelessWidget {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(height: 4.h,),
+                  SizedBox(height: 4.h),
                   const Text(
                     "تسوّق أو استأجر بدلتك المفضلة بخطوات بسيطة\nوتجربة فاخرة.",
                     textAlign: TextAlign.center,
@@ -62,7 +65,13 @@ class OnBoardingView extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 16.h),
-                  AppButton(text: "البدء الآن"),
+                  AppButton(
+                    text: "البدء الآن",
+                    onPressed: () {
+                      CacheHelper.setIsNotFirstTime();
+                      context.go(AppRouter.login);
+                    },
+                  ),
                 ],
               ),
             ),

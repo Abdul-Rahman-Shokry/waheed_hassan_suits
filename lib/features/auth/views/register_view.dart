@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/features/auth/views/login_view.dart';
 
+import '../../../core/routing/app_router.dart';
 import '../../../core/utils/helper_methods.dart';
 import '../../../core/widgets/app_button.dart';
 import '../../../core/widgets/app_image.dart';
@@ -68,7 +70,11 @@ class RegisterView extends StatelessWidget {
                                   padding: EdgeInsets.zero,
                                 ),
                                 onPressed: () {
-                                  goTo(page: LoginView(), canPop: true);
+                                  if (context.canPop()) {
+                                    context.pop();
+                                  } else {
+                                    context.go(AppRouter.login);
+                                  }
                                 },
                                 child: Text("تسجيل دخول"),
                               ),

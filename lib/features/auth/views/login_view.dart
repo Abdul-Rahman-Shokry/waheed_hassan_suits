@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/network/dio_client.dart';
 import 'package:waheed_hassan_suits/core/storage/cache_helper.dart';
@@ -14,6 +15,7 @@ import 'package:waheed_hassan_suits/features/auth/repositories/auth_repository.d
 import 'package:waheed_hassan_suits/features/auth/views/register_view.dart';
 
 import '../../../core/di/service_locator.dart';
+import '../../../core/routing/app_router.dart';
 import '../view_models/login_cubit.dart';
 
 part 'widgets/login_form.dart';

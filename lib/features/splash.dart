@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:waheed_hassan_suits/core/utils/helper_methods.dart';
-import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
-import 'package:waheed_hassan_suits/features/onboarding.dart';
+import 'package:go_router/go_router.dart';
+import '../core/routing/app_router.dart';
+import '../core/storage/cache_helper.dart';
+import '../core/widgets/app_image.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -11,13 +13,33 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
-  
+  Timer? _timer;
+
   @override
   void initState() {
     super.initState();
-    goTo(page: OnBoardingView(), delaySeconds: 3, canPop: false);
+    _startTimer();
   }
-  
+
+  void _startTimer() {
+    _timer = Timer(const Duration(seconds: 3), () {
+      if (!mounted) return;
+      if (CacheHelper.isFirstTime) {
+        context.go(AppRouter.onBoarding);
+      } else if (!CacheHelper.isLoggedIn) {
+        context.go(AppRouter.login);
+      } else {
+        context.go(AppRouter.login);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
