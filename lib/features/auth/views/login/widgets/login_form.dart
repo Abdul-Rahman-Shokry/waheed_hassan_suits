@@ -58,7 +58,7 @@ class _LoginFormState extends State<_LoginForm> {
                         padding: EdgeInsets.zero,
                       ),
                       onPressed: () {
-                        context.push(AppRouter.register);
+                        context.pushReplacement(AppRouter.register);
                       },
                       child: Text("إنشاء حساب جديد"),
                     ),

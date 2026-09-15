@@ -12,11 +12,11 @@ import 'package:waheed_hassan_suits/core/widgets/app_button.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_input.dart';
 import 'package:waheed_hassan_suits/features/auth/repositories/auth_repository.dart';
-import 'package:waheed_hassan_suits/features/auth/views/register_view.dart';
+import 'package:waheed_hassan_suits/features/auth/views/register/register_view.dart';
 
-import '../../../core/di/service_locator.dart';
-import '../../../core/routing/app_router.dart';
-import '../view_models/login_cubit.dart';
+import '../../../../core/di/service_locator.dart';
+import '../../../../core/routing/app_router.dart';
+import '../../view_models/login_cubit.dart';
 
 part 'widgets/login_form.dart';
 
