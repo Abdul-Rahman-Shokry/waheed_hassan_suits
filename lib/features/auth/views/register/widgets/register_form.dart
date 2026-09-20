@@ -1,7 +1,7 @@
 part of '../register_view.dart';
 
 class _RegisterForm extends StatefulWidget {
-  const _RegisterForm({super.key});
+  const _RegisterForm();
 
   @override
   State<_RegisterForm> createState() => _RegisterFormState();
@@ -83,24 +83,20 @@ class _RegisterFormState extends State<_RegisterForm> {
                 controller: _nameController,
               ),
               Text("رقم الهاتف"),
-              Directionality(
-                textDirection: TextDirection.ltr,
-                child: SizedBox(
-                  child: Column(
-                    children: [
-                      SizedBox(height: 8.h),
-                      AppInput(
-                        hint: "102233558",
-                        suffixIcon: "call.svg",
-                        withCountryCode: false,
-                        bottomSpace: 8.h,
-                        controller: _phoneController,
-                      ),
-                    ],
-                  ),
+              SizedBox(
+                child: Column(
+                  children: [
+                    SizedBox(height: 8.h),
+                    AppInput(
+                      hint: "102233558",
+                      suffixIcon: "call.svg",
+                      withCountryCode: false,
+                      bottomSpace: 8.h,
+                      controller: _phoneController,
+                    ),
+                  ],
                 ),
               ),
-
               Text("البريد الإلكتروني"),
               SizedBox(height: 8.h),
               AppInput(

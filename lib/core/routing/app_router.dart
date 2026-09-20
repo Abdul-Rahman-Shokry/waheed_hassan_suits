@@ -1,8 +1,7 @@
 import 'package:go_router/go_router.dart';
-import '../../features/auth/views/forgot_password_view.dart';
+import '../../features/auth/views/forgot_password/forgot_password_view.dart';
 import '../../features/auth/views/login/login_view.dart';
 import '../../features/auth/views/register/register_view.dart';
-import '../../features/auth/views/verify_otp.dart';
 import '../../features/onboarding.dart';
 import '../../features/splash.dart';
 import '../utils/helper_methods.dart';
@@ -17,7 +16,7 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     navigatorKey: navKey,
-    initialLocation: register, // TODO: initial location -> splash
+    initialLocation: forgotPassword, // TODO: initial location -> splash
     routes: [
       GoRoute(
         path: splash,
@@ -38,10 +37,6 @@ class AppRouter {
       GoRoute(
         path: forgotPassword,
         builder: (context, state) => const ForgotPasswordView(),
-      ),
-      GoRoute(
-        path: verifyOtp,
-        builder: (context, state) => const VerifyOtpView(),
       ),
     ],
   );

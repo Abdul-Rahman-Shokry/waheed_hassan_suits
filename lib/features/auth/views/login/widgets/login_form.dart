@@ -1,7 +1,7 @@
 part of '../login_view.dart';
 
 class _LoginForm extends StatefulWidget {
-  const _LoginForm({super.key});
+  const _LoginForm();
 
   @override
   State<_LoginForm> createState() => _LoginFormState();
@@ -9,9 +9,8 @@ class _LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<_LoginForm> {
   final _formKey = GlobalKey<FormState>();
-  // TODO: remove the fixed input text
-  final _emailController = TextEditingController(text: "abdelrahman3457+1@gmail.com");
-  final _passwordController = TextEditingController(text: "AbdoSh1030!");
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   @override
   void dispose() {

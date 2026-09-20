@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:waheed_hassan_suits/core/di/service_locator.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
@@ -25,6 +26,19 @@ class MyApp extends StatelessWidget {
         return MaterialApp.router(
           routerConfig: AppRouter.router,
           title: 'Waheed Hassan Suits',
+
+          locale: const Locale('ar'),
+
+          supportedLocales: const [
+            Locale('ar'),
+          ],
+
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+
           theme: ThemeData(
             fontFamily: "IBMPlexSansArabic",
             filledButtonTheme: FilledButtonThemeData(

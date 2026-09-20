@@ -1,9 +1,7 @@
 import 'package:dio/dio.dart';
 
-import '../../features/auth/views/login/login_view.dart';
 import '../routing/app_router.dart';
 import '../storage/cache_helper.dart';
-import '../utils/helper_methods.dart';
 import 'api_endpoints.dart';
 
 class AppInterceptor extends Interceptor {

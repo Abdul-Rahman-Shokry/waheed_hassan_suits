@@ -10,7 +10,6 @@ import '../../../../core/utils/helper_methods.dart';
 import '../../../../core/widgets/app_button.dart';
 import '../../../../core/widgets/app_image.dart';
 import '../../../../core/widgets/app_input.dart';
-import '../../view_models/login_cubit.dart';
 
 part 'widgets/register_form.dart';
 
@@ -22,43 +21,40 @@ class RegisterView extends StatelessWidget {
     return BlocProvider(
       create: (context) => sl<RegisterCubit>(),
       child: Scaffold(
-        body: Directionality(
-          textDirection: TextDirection.rtl,
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: AppImage(
-                  "onboarding.jpg",
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
+        body: Stack(
+          children: [
+            Positioned.fill(
+              child: AppImage(
+                "onboarding.jpg",
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              ),
+            ),
+            Positioned.fill(
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.4),
                 ),
               ),
-              Positioned.fill(
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    color: Colors.black.withValues(alpha: 0.4),
-                  ),
-                ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: BlocConsumer<RegisterCubit, DataState>(
+                listener: (context, state) {
+                  if (state == DataState.success){
+                    showMsg("Register Success");
+                  } else if (state == DataState.failed){
+                    final error = context.read<RegisterCubit>().errorMessage;
+                    showMsg(error ?? "حدث خطأ غير متوقع", isError: true);
+                  }
+                },
+                builder: (context, state) {
+                  return _RegisterForm();
+                },
               ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: BlocConsumer<RegisterCubit, DataState>(
-                  listener: (context, state) {
-                    if (state == DataState.success){
-                      showMsg("Register Success");
-                    } else if (state == DataState.failed){
-                      final error = context.read<RegisterCubit>().errorMessage;
-                      showMsg(error ?? "حدث خطأ غير متوقع", isError: true);
-                    }
-                  },
-                  builder: (context, state) {
-                    return _RegisterForm();
-                  },
-                ),
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
