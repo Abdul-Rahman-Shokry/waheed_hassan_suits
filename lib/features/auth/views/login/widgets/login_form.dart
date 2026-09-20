@@ -81,7 +81,7 @@ class _LoginFormState extends State<_LoginForm> {
               hint: "كلمة المرور",
               isPassword: true,
               bottomSpace: 8.h,
-              validator: AppValidators.password,
+              // validator: AppValidators.password,
               controller: _passwordController,
             ),
             Row(

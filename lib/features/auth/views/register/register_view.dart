@@ -44,6 +44,7 @@ class RegisterView extends StatelessWidget {
                 listener: (context, state) {
                   if (state == DataState.success){
                     showMsg("Register Success");
+                    context.go(AppRouter.registerSuccess);
                   } else if (state == DataState.failed){
                     final error = context.read<RegisterCubit>().errorMessage;
                     showMsg(error ?? "حدث خطأ غير متوقع", isError: true);

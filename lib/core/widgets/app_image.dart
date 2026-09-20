@@ -11,6 +11,7 @@ class AppImage extends StatelessWidget {
   final BoxFit fit;
   final bool isCircle;
   final Color? color;
+  final double lottieSpeed;
 
   const AppImage(
       this.path, {
@@ -21,6 +22,7 @@ class AppImage extends StatelessWidget {
         this.color,
         this.bottomSpace,
         this.isCircle = false,
+        this.lottieSpeed = 0.5,
       });
 
   @override
@@ -35,7 +37,7 @@ class AppImage extends StatelessWidget {
         builder: (context) {
           Widget child;
 
-          if(path.isEmpty) return SizedBox.shrink();
+          if (path.isEmpty) return const SizedBox.shrink();
 
           if (path.contains("com.example.avon/cache")) {
             child = Image.file(
@@ -93,18 +95,19 @@ class AppImage extends StatelessWidget {
               errorBuilder: (context, error, stackTrace) => _errorWidget(),
             );
           } else if (path.endsWith("json")) {
-            child = Lottie.asset(
-              "assets/lotties/$path",
+            child = _LottieWidget(
+              path: path,
               height: height,
               width: width,
               fit: myFit,
-              errorBuilder: (context, error, stackTrace) => _errorWidget(),
+              speed: lottieSpeed,
+              errorWidget: _errorWidget(),
             );
           } else {
             child = _errorWidget();
           }
 
-          if(isCircle) return ClipOval(child: child,);
+          if (isCircle) return ClipOval(child: child);
 
           return child;
         },
@@ -117,6 +120,59 @@ class AppImage extends StatelessWidget {
       Icons.error_outline_rounded,
       color: Colors.red,
       size: width ?? height ?? 24,
+    );
+  }
+}
+
+class _LottieWidget extends StatefulWidget {
+  final String path;
+  final double? height, width;
+  final BoxFit fit;
+  final double speed;
+  final Widget errorWidget;
+
+  const _LottieWidget({
+    required this.path,
+    this.height,
+    this.width,
+    required this.fit,
+    required this.speed,
+    required this.errorWidget,
+  });
+
+  @override
+  State<_LottieWidget> createState() => _LottieWidgetState();
+}
+
+class _LottieWidgetState extends State<_LottieWidget>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Lottie.asset(
+      "assets/lotties/${widget.path}",
+      height: widget.height,
+      width: widget.width,
+      fit: widget.fit,
+      controller: _controller,
+      onLoaded: (composition) {
+        _controller.duration = composition.duration * (1 / widget.speed);
+        _controller.repeat();
+      },
+      errorBuilder: (context, error, stackTrace) => widget.errorWidget,
     );
   }
 }

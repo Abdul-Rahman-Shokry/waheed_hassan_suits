@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:waheed_hassan_suits/features/auth/views/register/widgets/register_success.dart';
 import '../../features/auth/views/forgot_password/forgot_password_view.dart';
 import '../../features/auth/views/login/login_view.dart';
 import '../../features/auth/views/register/register_view.dart';
@@ -13,10 +14,11 @@ class AppRouter {
   static const String register = '/register';
   static const String forgotPassword = '/forgot-password';
   static const String verifyOtp = '/verify-otp';
+  static const String registerSuccess = '/register-success';
 
   static final GoRouter router = GoRouter(
     navigatorKey: navKey,
-    initialLocation: forgotPassword, // TODO: initial location -> splash
+    initialLocation: login, // TODO: initial location -> splash
     routes: [
       GoRoute(
         path: splash,
@@ -38,6 +40,10 @@ class AppRouter {
         path: forgotPassword,
         builder: (context, state) => const ForgotPasswordView(),
       ),
+      GoRoute(
+          path: registerSuccess,
+          builder: (context, state) => const RegisterSuccess(),
+      )
     ],
   );
 }
