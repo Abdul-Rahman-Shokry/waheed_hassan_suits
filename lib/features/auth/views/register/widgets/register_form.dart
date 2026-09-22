@@ -78,7 +78,7 @@ class _RegisterFormState extends State<_RegisterForm> {
               SizedBox(height: 8.h),
               AppInput(
                 hint: "اكتب اسمك بالكامل",
-                suffixIcon: "profile.svg",
+                suffixIcon: "inactive_profile.svg",
                 bottomSpace: 8.h,
                 controller: _nameController,
               ),

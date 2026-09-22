@@ -41,6 +41,14 @@ class MyApp extends StatelessWidget {
 
           theme: ThemeData(
             fontFamily: "IBMPlexSansArabic",
+            splashFactory: NoSplash.splashFactory,
+            splashColor: Colors.transparent,
+            highlightColor: Colors.transparent,
+            hoverColor: Colors.transparent,
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+              enableFeedback: false,
+            ),
+
             filledButtonTheme: FilledButtonThemeData(
               style: FilledButton.styleFrom(
                 backgroundColor: const Color(0xff000000),

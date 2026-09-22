@@ -3,7 +3,12 @@ import 'package:waheed_hassan_suits/features/auth/views/register/widgets/registe
 import '../../features/auth/views/forgot_password/forgot_password_view.dart';
 import '../../features/auth/views/login/login_view.dart';
 import '../../features/auth/views/register/register_view.dart';
+import '../../features/cart/cart_view.dart';
+import '../../features/home/home_view.dart';
+import '../../features/main_layout/main_layout_view.dart';
 import '../../features/onboarding.dart';
+import '../../features/orders/orders_view.dart';
+import '../../features/profile/profile_view.dart';
 import '../../features/splash.dart';
 import '../utils/helper_methods.dart';
 
@@ -16,9 +21,14 @@ class AppRouter {
   static const String verifyOtp = '/verify-otp';
   static const String registerSuccess = '/register-success';
 
+  static const String home = '/home';
+  static const String cart = '/cart';
+  static const String orders = '/orders';
+  static const String profile = '/profile';
+
   static final GoRouter router = GoRouter(
     navigatorKey: navKey,
-    initialLocation: login, // TODO: initial location -> splash
+    initialLocation: home,
     routes: [
       GoRoute(
         path: splash,
@@ -41,9 +51,48 @@ class AppRouter {
         builder: (context, state) => const ForgotPasswordView(),
       ),
       GoRoute(
-          path: registerSuccess,
-          builder: (context, state) => const RegisterSuccess(),
-      )
+        path: registerSuccess,
+        builder: (context, state) => const RegisterSuccess(),
+      ),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return MainLayoutView(navigationShell: navigationShell);
+        },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: home,
+                builder: (context, state) => const HomeView(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: cart,
+                builder: (context, state) => const CartView(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: orders,
+                builder: (context, state) => const OrdersView(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: profile,
+                builder: (context, state) => const ProfileView(),
+              ),
+            ],
+          ),
+        ],
+      ),
     ],
   );
 }

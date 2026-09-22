@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/utils/helper_methods.dart';
-import 'package:waheed_hassan_suits/core/utils/validators.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_button.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_input.dart';
@@ -46,6 +45,7 @@ class LoginView extends StatelessWidget {
                 listener: (context, state) {
                   if (state == DataState.success){
                     showMsg("Login Success");
+                    context.go(AppRouter.home);
                   } else if (state == DataState.failed){
                     final error = context.read<LoginCubit>().errorMessage;
                     showMsg(error ?? "حدث خطأ غير متوقع", isError: true);

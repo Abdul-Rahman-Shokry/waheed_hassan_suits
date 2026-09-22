@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:pinput/pinput.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
-import 'package:waheed_hassan_suits/core/utils/validators.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_back.dart';
 import 'package:waheed_hassan_suits/features/auth/view_models/forgot_password_cubit.dart';
 
