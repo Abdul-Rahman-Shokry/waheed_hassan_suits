@@ -6,7 +6,7 @@ import 'package:pinput/pinput.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_back.dart';
-import 'package:waheed_hassan_suits/features/auth/view_models/forgot_password_cubit.dart';
+import 'package:waheed_hassan_suits/features/auth/logic/forgot_password_cubit.dart';
 
 import '../../../../core/di/service_locator.dart';
 import '../../../../core/utils/helper_methods.dart';
@@ -101,9 +101,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               leadingWidth: 68.w,
               leading: Padding(
                 padding: EdgeInsetsDirectional.only(start: 16.w),
-                child: AppBack(
-                  onTap: _previousStep,
-                ),
+                child: AppBack(onTap: _previousStep),
               ),
               title: const Text("نسيت كلمة المرور"),
               centerTitle: true,
@@ -112,10 +110,7 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
               padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
               child: Column(
                 children: [
-                  AuthStepProgress(
-                    currentStep: _currentStep,
-                    totalSteps: 3,
-                  ),
+                  AuthStepProgress(currentStep: _currentStep, totalSteps: 3),
                   SizedBox(height: 24.h),
                   Expanded(
                     child: Container(
@@ -136,7 +131,6 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
                       ),
                     ),
                   ),
-                  const Spacer(),
                 ],
               ),
             ),

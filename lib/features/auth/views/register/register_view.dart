@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:waheed_hassan_suits/features/auth/view_models/register_cubit.dart';
+import 'package:waheed_hassan_suits/features/auth/logic/register_cubit.dart';
 import '../../../../core/di/service_locator.dart';
 import '../../../../core/enums/data_state.dart';
 import '../../../../core/routing/app_router.dart';

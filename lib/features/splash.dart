@@ -26,8 +26,8 @@ class _SplashViewState extends State<SplashView> {
       if (!mounted) return;
       if (CacheHelper.isFirstTime) {
         context.go(AppRouter.onBoarding);
-      } else if (!CacheHelper.isLoggedIn) {
-        context.go(AppRouter.login);
+      } else if (CacheHelper.isLoggedIn) {
+        context.go(AppRouter.home);
       } else {
         context.go(AppRouter.login);
       }
@@ -42,10 +42,6 @@ class _SplashViewState extends State<SplashView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: AppImage("waheed.svg"),
-      ),
-    );
+    return Scaffold(body: Center(child: AppImage("waheed.svg")));
   }
 }

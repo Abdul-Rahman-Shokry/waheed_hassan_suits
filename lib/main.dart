@@ -29,9 +29,7 @@ class MyApp extends StatelessWidget {
 
           locale: const Locale('ar'),
 
-          supportedLocales: const [
-            Locale('ar'),
-          ],
+          supportedLocales: const [Locale('ar')],
 
           localizationsDelegates: const [
             GlobalMaterialLocalizations.delegate,
@@ -48,7 +46,7 @@ class MyApp extends StatelessWidget {
             bottomNavigationBarTheme: const BottomNavigationBarThemeData(
               enableFeedback: false,
             ),
-
+            scaffoldBackgroundColor: Color(0xffF3F3F4),
             filledButtonTheme: FilledButtonThemeData(
               style: FilledButton.styleFrom(
                 backgroundColor: const Color(0xff000000),
@@ -62,19 +60,36 @@ class MyApp extends StatelessWidget {
                 ),
               ),
             ),
+            outlinedButtonTheme: OutlinedButtonThemeData(
+              style: OutlinedButton.styleFrom(
+                fixedSize: Size.fromHeight(55.h),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.r),
+                ),
+              ),
+            ),
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
-                  foregroundColor: const Color(0xff314158),
-                  textStyle: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400)
+                foregroundColor: const Color(0xff314158),
+                textStyle: TextStyle(
+                  fontSize: 14.sp,
+                  fontWeight: FontWeight.w400,
+                ),
               ),
             ),
             inputDecorationTheme: InputDecorationThemeData(
               border: OutlineInputBorder(
-                borderSide: BorderSide(color: const Color(0xffEAEAEA), width: 1.w),
+                borderSide: BorderSide(
+                  color: const Color(0xffEAEAEA),
+                  width: 1.w,
+                ),
                 borderRadius: BorderRadius.circular(12.r),
               ),
               enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: const Color(0xffEAEAEA), width: 1.w),
+                borderSide: BorderSide(
+                  color: const Color(0xffEAEAEA),
+                  width: 1.w,
+                ),
                 borderRadius: BorderRadius.circular(12.r),
               ),
               hintStyle: TextStyle(

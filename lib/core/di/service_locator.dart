@@ -1,9 +1,11 @@
 import 'package:get_it/get_it.dart';
-import 'package:waheed_hassan_suits/features/auth/view_models/forgot_password_cubit.dart';
-import 'package:waheed_hassan_suits/features/auth/view_models/register_cubit.dart';
+import 'package:waheed_hassan_suits/features/auth/logic/forgot_password_cubit.dart';
+import 'package:waheed_hassan_suits/features/auth/logic/register_cubit.dart';
 
 import '../../features/auth/repositories/auth_repository.dart';
-import '../../features/auth/view_models/login_cubit.dart';
+import '../../features/auth/logic/login_cubit.dart';
+import '../../features/profile/repositories/profile_repository.dart';
+import '../../features/profile/logic/profile_cubit.dart';
 import '../network/dio_client.dart';
 
 final GetIt sl = GetIt.instance;
@@ -11,7 +13,10 @@ final GetIt sl = GetIt.instance;
 void setupServiceLocator() {
   sl.registerLazySingleton<DioClient>(() => DioClient());
   sl.registerLazySingleton<AuthRepository>(() => AuthRepository(sl()));
+  sl.registerLazySingleton<ProfileRepository>(() => ProfileRepository(sl()));
+
   sl.registerFactory<LoginCubit>(() => LoginCubit(sl()));
   sl.registerFactory<RegisterCubit>(() => RegisterCubit(sl()));
   sl.registerFactory<ForgotPasswordCubit>(() => ForgotPasswordCubit(sl()));
+  sl.registerFactory<ProfileCubit>(() => ProfileCubit(sl()));
 }

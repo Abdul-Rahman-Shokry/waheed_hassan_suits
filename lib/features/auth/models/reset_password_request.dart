@@ -1,10 +1,10 @@
-class ResetPasswordRequestBody {
+class ResetPasswordRequest {
   final String email;
   final String newPassword;
   final String confirmNewPassword;
   final String otpCode;
 
-  ResetPasswordRequestBody({
+  ResetPasswordRequest({
     required this.email,
     required this.newPassword,
     required this.confirmNewPassword,

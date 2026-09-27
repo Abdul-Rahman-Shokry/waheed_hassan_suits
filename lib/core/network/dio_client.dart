@@ -117,6 +117,43 @@ class DioClient {
       return CustomResponse(isSuccess: false, errorMsg: "Unexpected Error");
     }
   }
+
+  Future<CustomResponse> deleteData(
+      String endpoint, {
+        Map<String, dynamic>? queryParameters,
+        Map<String, dynamic>? body,
+      }) async {
+    try {
+      final resp = await _dio.delete(
+        endpoint,
+        queryParameters: queryParameters,
+        data: body,
+      );
+
+      if (resp.statusCode != null &&
+          resp.statusCode! >= 200 &&
+          resp.statusCode! < 300) {
+        return CustomResponse(isSuccess: true, successData: resp.data);
+      }
+
+      return CustomResponse(isSuccess: false);
+    } on DioException catch (e) {
+      String? errorMessage;
+      if (e.response?.data != null && e.response?.data is Map) {
+        errorMessage = e.response?.data["message"];
+      } else {
+        errorMessage = e.message;
+      }
+
+      return CustomResponse(
+        isSuccess: false,
+        errorMsg: errorMessage,
+        errorStatusCode: e.response?.statusCode,
+      );
+    } catch (e) {
+      return CustomResponse(isSuccess: false, errorMsg: "Unexpected Error");
+    }
+  }
 }
 
 class CustomResponse {

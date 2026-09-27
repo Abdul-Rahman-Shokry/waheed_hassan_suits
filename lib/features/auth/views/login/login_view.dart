@@ -10,7 +10,7 @@ import 'package:waheed_hassan_suits/core/widgets/app_input.dart';
 
 import '../../../../core/di/service_locator.dart';
 import '../../../../core/routing/app_router.dart';
-import '../../view_models/login_cubit.dart';
+import '../../logic/login_cubit.dart';
 
 part 'widgets/login_form.dart';
 
@@ -43,10 +43,14 @@ class LoginView extends StatelessWidget {
               alignment: Alignment.bottomCenter,
               child: BlocListener<LoginCubit, DataState>(
                 listener: (context, state) {
-                  if (state == DataState.success){
+                  if (state == DataState.success) {
                     showMsg("Login Success");
-                    context.go(AppRouter.home);
-                  } else if (state == DataState.failed){
+                    if (context.canPop()) {
+                      context.pop();
+                    } else {
+                      context.go(AppRouter.home);
+                    }
+                  } else if (state == DataState.failed) {
                     final error = context.read<LoginCubit>().errorMessage;
                     showMsg(error ?? "حدث خطأ غير متوقع", isError: true);
                   }

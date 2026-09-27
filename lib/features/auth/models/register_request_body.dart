@@ -1,11 +1,11 @@
-class RegisterRequestBody {
+class RegisterRequest {
   final String fullName;
   final String email;
   final String phoneNumber;
   final String password;
   final String confirmPassword;
 
-  RegisterRequestBody({
+  RegisterRequest({
     required this.fullName,
     required this.email,
     required this.phoneNumber,

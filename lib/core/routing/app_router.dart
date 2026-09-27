@@ -8,7 +8,7 @@ import '../../features/home/home_view.dart';
 import '../../features/main_layout/main_layout_view.dart';
 import '../../features/onboarding.dart';
 import '../../features/orders/orders_view.dart';
-import '../../features/profile/profile_view.dart';
+import '../../features/profile/views/profile_view.dart';
 import '../../features/splash.dart';
 import '../utils/helper_methods.dart';
 
@@ -28,7 +28,7 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     navigatorKey: navKey,
-    initialLocation: home,
+    initialLocation: splash,
     routes: [
       GoRoute(
         path: splash,

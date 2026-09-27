@@ -20,7 +20,7 @@ class RegisterCubit extends Cubit<DataState> {
   }) async {
     emit(DataState.loading);
 
-    final requestBody = RegisterRequestBody(
+    final requestBody = RegisterRequest(
       fullName: fullName,
       email: email,
       phoneNumber: phoneNumber,

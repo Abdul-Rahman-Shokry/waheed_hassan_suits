@@ -53,6 +53,10 @@ class CacheHelper {
     return _prefs.getString("email") ?? "";
   }
 
+  static String get userId {
+    return _prefs.getString("userId") ?? "";
+  }
+
   static Future<void> saveUserData({UserModel? model}) async {
     if (model == null) return;
 

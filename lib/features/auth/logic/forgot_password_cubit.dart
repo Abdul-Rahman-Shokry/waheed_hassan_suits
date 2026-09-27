@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/enums/data_state.dart';
-import '../models/forgot_password_request_body.dart';
-import '../models/reset_password_request_body.dart';
+import '../models/forgot_password_request.dart';
+import '../models/reset_password_request.dart';
 import '../repositories/auth_repository.dart';
 
 class ForgotPasswordCubit extends Cubit<DataState> {
@@ -18,7 +18,7 @@ class ForgotPasswordCubit extends Cubit<DataState> {
     userEmail = email;
     emit(DataState.loading);
 
-    final requestBody = ForgotPasswordRequestBody(
+    final requestBody = ForgotPasswordRequest(
         email: email
     );
 
@@ -39,7 +39,7 @@ class ForgotPasswordCubit extends Cubit<DataState> {
   }) async {
     emit(DataState.loading);
 
-    final requestBody = ResetPasswordRequestBody(
+    final requestBody = ResetPasswordRequest(
       email: userEmail,
       newPassword: newPassword,
       confirmNewPassword: confirmNewPassword,
