@@ -7,5 +7,7 @@ class ApiEndpoints {
   static const String forgotPassword = '/api/Account/forgot-password';
   static const String resetPassword = '/api/Account/reset-password';
 
+  static const String products = '/api/Products';
+
   static String deleteAccount(String id) => '/api/Account/$id';
 }

@@ -1,10 +1,12 @@
 import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/features/auth/views/register/widgets/register_success.dart';
+import 'package:waheed_hassan_suits/features/home/views/all_categories_view.dart';
 import '../../features/auth/views/forgot_password/forgot_password_view.dart';
 import '../../features/auth/views/login/login_view.dart';
 import '../../features/auth/views/register/register_view.dart';
 import '../../features/cart/cart_view.dart';
-import '../../features/home/home_view.dart';
+import '../../features/home/views/all_products_view.dart';
+import '../../features/home/views/home_view.dart';
 import '../../features/main_layout/main_layout_view.dart';
 import '../../features/onboarding.dart';
 import '../../features/orders/orders_view.dart';
@@ -25,6 +27,8 @@ class AppRouter {
   static const String cart = '/cart';
   static const String orders = '/orders';
   static const String profile = '/profile';
+  static const String allProducts = '/all-products';
+  static const String allCategories = '/all-categories';
 
   static final GoRouter router = GoRouter(
     navigatorKey: navKey,
@@ -53,6 +57,19 @@ class AppRouter {
       GoRoute(
         path: registerSuccess,
         builder: (context, state) => const RegisterSuccess(),
+      ),
+      GoRoute(
+        path: allProducts,
+        builder: (context, state) {
+          final title = state.extra as String? ?? "كل المنتجات";
+          return AllProductsView(categoryTitle: title);
+        },
+      ),
+      GoRoute(
+        path: allCategories,
+        builder: (context, state) {
+          return AllCategoriesView();
+        },
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
