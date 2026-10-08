@@ -82,10 +82,7 @@ class _HomeCategoriesSection extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(16.r),
-          border: Border.all(
-            color: const Color(0xffEAEAEA),
-            width: 1.w,
-          ),
+          border: Border.all(color: const Color(0xffEAEAEA), width: 1.w),
         ),
         child: Material(
           color: Colors.transparent,
@@ -119,11 +116,7 @@ class _HomeCategoriesSection extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: AppImage(
-                        iconPath,
-                        width: 24.r,
-                        height: 24.r,
-                      ),
+                      child: AppImage(iconPath, width: 24.r, height: 24.r),
                     ),
                   ),
                 ],

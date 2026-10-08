@@ -20,9 +20,7 @@ class _HomeProductsSection extends StatelessWidget {
           return SizedBox(
             height: 250.h,
             child: const Center(
-              child: CircularProgressIndicator(
-                color: Colors.black,
-              ),
+              child: CircularProgressIndicator(color: Colors.black),
             ),
           );
         }
@@ -35,10 +33,7 @@ class _HomeProductsSection extends StatelessWidget {
                 children: [
                   Text(
                     state.errorMessage ?? "حدث خطأ أثناء تحميل المنتجات",
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      color: Colors.red,
-                    ),
+                    style: TextStyle(fontSize: 14.sp, color: Colors.red),
                   ),
                   SizedBox(height: 8.h),
                   IconButton(
@@ -100,6 +95,7 @@ class _HomeProductsSection extends StatelessWidget {
                 final product = state.products[index];
                 return AppProductCard(
                   product: product,
+                  isFavorite: state.favoriteProductIds.contains(product.id),
                   onTap: () => onProductTap?.call(product),
                   onFavoriteTap: () => onFavoriteTap?.call(product),
                 );

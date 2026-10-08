@@ -58,20 +58,14 @@ class AllCategoriesView extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16.r),
-              border: Border.all(
-                color: const Color(0xffEAEAEA),
-                width: 1.w,
-              ),
+              border: Border.all(color: const Color(0xffEAEAEA), width: 1.w),
             ),
             child: Material(
               color: Colors.transparent,
               child: InkWell(
                 borderRadius: BorderRadius.circular(16.r),
                 onTap: () {
-                  context.push(
-                    AppRouter.allProducts,
-                    extra: category.title,
-                  );
+                  context.push(AppRouter.allProducts, extra: category.title);
                 },
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),

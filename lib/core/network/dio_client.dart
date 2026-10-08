@@ -62,12 +62,7 @@ class DioClient {
 
       return CustomResponse(isSuccess: false);
     } on DioException catch (e) {
-      String? errorMessage;
-      if (e.response?.data != null && e.response?.data is Map) {
-        errorMessage = e.response?.data["message"];
-      } else {
-        errorMessage = e.message;
-      }
+      final String? errorMessage = _extractErrorMessage(e);
 
       return CustomResponse(
         isSuccess: false,
@@ -101,12 +96,7 @@ class DioClient {
         return CustomResponse(isSuccess: false);
       }
     } on DioException catch (e) {
-      String? errorMessage;
-      if (e.response?.data != null && e.response?.data is Map) {
-        errorMessage = e.response?.data["message"];
-      } else {
-        errorMessage = e.message;
-      }
+      final String? errorMessage = _extractErrorMessage(e);
 
       return CustomResponse(
         isSuccess: false,
@@ -138,12 +128,7 @@ class DioClient {
 
       return CustomResponse(isSuccess: false);
     } on DioException catch (e) {
-      String? errorMessage;
-      if (e.response?.data != null && e.response?.data is Map) {
-        errorMessage = e.response?.data["message"];
-      } else {
-        errorMessage = e.message;
-      }
+      final String? errorMessage = _extractErrorMessage(e);
 
       return CustomResponse(
         isSuccess: false,
@@ -153,6 +138,20 @@ class DioClient {
     } catch (e) {
       return CustomResponse(isSuccess: false, errorMsg: "Unexpected Error");
     }
+  }
+
+  /// Reads "message", then ASP.NET ProblemDetails "title", then status code.
+  String? _extractErrorMessage(DioException e) {
+    final data = e.response?.data;
+    if (data is Map) {
+      final message = data["message"] ?? data["title"];
+      if (message is String && message.isNotEmpty) return message;
+    } else if (data is String && data.isNotEmpty) {
+      return data;
+    }
+    final statusCode = e.response?.statusCode;
+    if (statusCode != null) return "Error $statusCode";
+    return e.message;
   }
 }
 

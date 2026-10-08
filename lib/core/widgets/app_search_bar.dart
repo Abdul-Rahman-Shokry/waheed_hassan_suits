@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'filter_bottom_sheet.dart';
 
 class AppSearchBar extends StatefulWidget {
   final TextEditingController? controller;
@@ -92,7 +93,8 @@ class _AppSearchBarState extends State<AppSearchBar> {
             SizedBox(width: 10.w),
             InkWell(
               borderRadius: BorderRadius.circular(16.r),
-              onTap: widget.onFilterTap,
+              onTap:
+                  widget.onFilterTap ?? () => FilterBottomSheet.show(context),
               child: Icon(
                 Icons.tune_rounded,
                 color: Colors.black,

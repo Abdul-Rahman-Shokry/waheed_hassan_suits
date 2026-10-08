@@ -9,7 +9,7 @@ void goTo({required Widget page, bool canPop = true, int? delaySeconds}) {
     Navigator.pushAndRemoveUntil(
       navKey.currentContext!,
       MaterialPageRoute(builder: (_) => page),
-          (_) => canPop,
+      (_) => canPop,
     );
   }
 
@@ -27,7 +27,7 @@ void showMsg(String? msg, {bool isError = false}) {
     ScaffoldMessenger.of(navKey.currentContext!).showSnackBar(
       SnackBar(
         backgroundColor: isError ? Colors.red : Colors.green,
-        content: Text(msg, maxLines: 2,),
+        content: Text(msg, maxLines: 2),
       ),
     );
   }

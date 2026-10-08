@@ -5,12 +5,14 @@ import '../../features/home/models/product_model.dart';
 
 class AppProductCard extends StatelessWidget {
   final Data product;
+  final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onFavoriteTap;
 
   const AppProductCard({
     super.key,
     required this.product,
+    this.isFavorite = false,
     this.onTap,
     this.onFavoriteTap,
   });
@@ -80,9 +82,9 @@ class AppProductCard extends StatelessWidget {
                       ),
                       child: Center(
                         child: Icon(
-                          Icons.favorite_border_rounded,
+                          isFavorite ? Icons.favorite_rounded : Icons.favorite_border_rounded,
                           size: 20.r,
-                          color: Colors.black,
+                          color: isFavorite ? Colors.red : Colors.black,
                         ),
                       ),
                     ),
