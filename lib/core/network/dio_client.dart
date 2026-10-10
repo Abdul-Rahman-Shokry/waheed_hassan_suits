@@ -80,16 +80,26 @@ class DioClient {
     }
   }
 
-  Future<CustomResponse> getData(
+  Future<CustomResponse> getData<T>(
     String endpoint, {
     Map<String, dynamic>? queryParameters,
   }) async {
     try {
-      final resp = await _dio.get(endpoint, queryParameters: queryParameters);
+      final resp = await _dio.get<T>(endpoint, queryParameters: queryParameters);
 
-      Map<String, dynamic> data;
+      dynamic data;
       if (resp.data is List) {
-        data = {"list": resp.data};
+        if (resp.data is T && T != dynamic) {
+          data = resp.data;
+        } else {
+          data = {"list": resp.data};
+        }
+      } else if (resp.data is Map) {
+        if (resp.data is Map<String, dynamic>) {
+          data = resp.data;
+        } else {
+          data = Map<String, dynamic>.from(resp.data as Map);
+        }
       } else {
         data = resp.data;
       }
@@ -146,7 +156,6 @@ class DioClient {
     }
   }
 
-  /// Reads "message", then ASP.NET ProblemDetails "title", then status code.
   String? _extractErrorMessage(DioException e) {
     final data = e.response?.data;
     if (data is Map) {
@@ -173,4 +182,6 @@ class CustomResponse {
     this.successData,
     this.errorStatusCode,
   });
+
+  T? dataAs<T>() => successData is T ? successData as T : null;
 }
