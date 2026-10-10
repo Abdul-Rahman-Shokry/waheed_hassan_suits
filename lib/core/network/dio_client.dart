@@ -8,10 +8,16 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 class DioClient {
   final Dio _dio;
 
-  DioClient()
-    : _dio = Dio(
+  DioClient({
+    Duration connectTimeout = const Duration(seconds: 10),
+    Duration receiveTimeout = const Duration(seconds: 10),
+    Duration sendTimeout = const Duration(seconds: 10),
+  }) : _dio = Dio(
         BaseOptions(
           baseUrl: ApiEndpoints.baseUrl,
+          connectTimeout: connectTimeout,
+          receiveTimeout: receiveTimeout,
+          sendTimeout: sendTimeout,
           headers: {
             "Content-Type": "application/json",
             "Accept": "application/json",
