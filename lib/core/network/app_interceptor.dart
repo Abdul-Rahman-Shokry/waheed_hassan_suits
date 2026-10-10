@@ -1,10 +1,13 @@
 import 'package:dio/dio.dart';
 
-import '../routing/app_router.dart';
 import '../storage/cache_helper.dart';
 import 'api_endpoints.dart';
 
 class AppInterceptor extends Interceptor {
+  final void Function()? onUnauthorized;
+
+  AppInterceptor({this.onUnauthorized});
+
   final List<String> _publicEndpoints = [
     ApiEndpoints.login,
     ApiEndpoints.register,
@@ -13,7 +16,7 @@ class AppInterceptor extends Interceptor {
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
     final bool isPublic = _publicEndpoints.any(
-          (endpoint) => options.path.contains(endpoint),
+      (endpoint) => options.path.contains(endpoint),
     );
 
     if (!isPublic && CacheHelper.token != null) {
@@ -27,9 +30,9 @@ class AppInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) {
     if (err.response?.statusCode == 401) {
       CacheHelper.clearSharedPrefs();
-      AppRouter.router.go(AppRouter.login);
+      onUnauthorized?.call();
     }
 
     handler.next(err);
   }
-}
+}

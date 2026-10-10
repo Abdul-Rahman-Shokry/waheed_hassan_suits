@@ -12,6 +12,8 @@ class DioClient {
     Duration connectTimeout = const Duration(seconds: 10),
     Duration receiveTimeout = const Duration(seconds: 10),
     Duration sendTimeout = const Duration(seconds: 10),
+    AppInterceptor? appInterceptor,
+    void Function()? onUnauthorized,
   }) : _dio = Dio(
         BaseOptions(
           baseUrl: ApiEndpoints.baseUrl,
@@ -24,7 +26,9 @@ class DioClient {
           },
         ),
       ) {
-    _dio.interceptors.add(AppInterceptor());
+    _dio.interceptors.add(
+      appInterceptor ?? AppInterceptor(onUnauthorized: onUnauthorized),
+    );
     // if (kDebugMode) {
     //   _dio.interceptors.add(
     //     LogInterceptor(

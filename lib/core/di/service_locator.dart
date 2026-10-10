@@ -9,11 +9,18 @@ import '../../features/home/repositories/home_repository.dart';
 import '../../features/profile/repositories/profile_repository.dart';
 import '../../features/profile/logic/profile_cubit.dart';
 import '../network/dio_client.dart';
+import '../routing/app_router.dart';
 
 final GetIt sl = GetIt.instance;
 
 void setupServiceLocator() {
-  sl.registerLazySingleton<DioClient>(() => DioClient());
+  sl.registerLazySingleton<DioClient>(
+    () => DioClient(
+      onUnauthorized: () {
+        AppRouter.router.go(AppRouter.login);
+      },
+    ),
+  );
   sl.registerLazySingleton<AuthRepository>(() => AuthRepository(sl()));
   sl.registerLazySingleton<ProfileRepository>(() => ProfileRepository(sl()));
   sl.registerLazySingleton<HomeRepository>(() => HomeRepository(sl()));
