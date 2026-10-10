@@ -328,21 +328,16 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
 }
 
 class _CustomRangeThumbShape extends RangeSliderThumbShape {
-  final double radius;
-  final double borderWidth;
-  final Color borderColor;
-  final Color fillColor;
+  static const double _radius = 11.0;
+  static const double _borderWidth = 3.0;
+  static const Color _borderColor = Color(0xff334155);
+  static const Color _fillColor = Colors.white;
 
-  const _CustomRangeThumbShape({
-    this.radius = 11.0,
-    this.borderWidth = 3.0,
-    this.borderColor = const Color(0xff334155),
-    this.fillColor = Colors.white,
-  });
+  const _CustomRangeThumbShape();
 
   @override
   Size getPreferredSize(bool isEnabled, bool isDiscrete) =>
-      Size.fromRadius(radius);
+      const Size.fromRadius(_radius);
 
   @override
   void paint(
@@ -360,14 +355,14 @@ class _CustomRangeThumbShape extends RangeSliderThumbShape {
   }) {
     final Canvas canvas = context.canvas;
     final Paint fillPaint = Paint()
-      ..color = fillColor
+      ..color = _fillColor
       ..style = PaintingStyle.fill;
     final Paint borderPaint = Paint()
-      ..color = borderColor
-      ..strokeWidth = borderWidth
+      ..color = _borderColor
+      ..strokeWidth = _borderWidth
       ..style = PaintingStyle.stroke;
 
-    canvas.drawCircle(center, radius, fillPaint);
-    canvas.drawCircle(center, radius, borderPaint);
+    canvas.drawCircle(center, _radius, fillPaint);
+    canvas.drawCircle(center, _radius, borderPaint);
   }
 }
