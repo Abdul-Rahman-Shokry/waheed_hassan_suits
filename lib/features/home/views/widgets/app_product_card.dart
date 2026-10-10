@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
-import '../../features/home/models/product_model.dart';
+import '../../models/product_model.dart';
 
 class AppProductCard extends StatelessWidget {
   final Data product;

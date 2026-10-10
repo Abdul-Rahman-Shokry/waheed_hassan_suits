@@ -5,10 +5,10 @@ import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_back.dart';
-import 'package:waheed_hassan_suits/core/widgets/app_product_card.dart';
 import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
+import '../widgets/app_product_card.dart';
 import '../widgets/wishlist_message_listener.dart';
 
 class WishlistView extends StatelessWidget {

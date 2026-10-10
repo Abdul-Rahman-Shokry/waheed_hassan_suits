@@ -6,7 +6,6 @@ import 'package:waheed_hassan_suits/core/di/service_locator.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
-import 'package:waheed_hassan_suits/core/widgets/app_product_card.dart';
 import 'package:waheed_hassan_suits/core/widgets/appbar_action_button.dart';
 import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 
@@ -14,6 +13,7 @@ import '../../../../core/widgets/app_back.dart';
 import '../../../../core/widgets/app_search_bar.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
+import '../widgets/app_product_card.dart';
 import '../widgets/wishlist_message_listener.dart';
 
 class AllProductsView extends StatelessWidget {

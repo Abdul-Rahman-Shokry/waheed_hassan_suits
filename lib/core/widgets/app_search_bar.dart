@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
-import 'filter_bottom_sheet.dart';
+import '../../features/home/views/widgets/filter_bottom_sheet.dart';
 
 class AppSearchBar extends StatefulWidget {
   final TextEditingController? controller;
