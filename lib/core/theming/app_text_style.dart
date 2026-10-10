@@ -83,13 +83,13 @@ class AppTextStyles {
     color: Color(0xff939393),
   );
 
-  static TextStyle font14Bold = TextStyle(
+  static TextStyle font14Medium = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
     color: Color(0xff314158),
   );
 
-  static TextStyle font14BoldBlack = TextStyle(
+  static TextStyle font14MediumBlack = TextStyle(
     fontSize: 14.sp,
     fontWeight: FontWeight.w500,
     color: Color(0xff000000),

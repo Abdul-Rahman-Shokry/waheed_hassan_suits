@@ -317,7 +317,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
         ),
         child: Text(
           title,
-          style: AppTextStyles.font14BoldBlack.copyWith(
+          style: AppTextStyles.font14MediumBlack.copyWith(
             fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
             color: isSelected ? Colors.white : const Color(0xff4B5563),
           ),

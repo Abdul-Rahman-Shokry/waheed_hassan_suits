@@ -24,24 +24,27 @@ class AppButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return isOutlinedButton
         ? OutlinedButton(
-            onPressed: onPressed ?? (){},
+            onPressed: onPressed,
             child: Text(
               text,
               style: AppTextStyles.font16SemiBold.copyWith(
-                color: const Color(0xff1F2937),
+                color: textColor ?? const Color(0xff1F2937),
               ),
             ),
           )
         : FilledButton(
-            style: FilledButton.styleFrom(backgroundColor: bgColor),
-            onPressed: onPressed ?? () {},
+            style: FilledButton.styleFrom(
+              backgroundColor: bgColor,
+              foregroundColor: textColor ?? Colors.white,
+            ),
+            onPressed: onPressed,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   text,
                   style: AppTextStyles.font16SemiBold.copyWith(
-                    color: textColor,
+                    color: textColor ?? Colors.white,
                   ),
                 ),
                 if (iconPath != null && iconPath!.isNotEmpty) ...[

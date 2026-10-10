@@ -29,7 +29,7 @@ class _ForgotPasswordStepThreeState extends State<_ForgotPasswordStepThree> {
           SizedBox(height: 12.h),
           Text(
             "كلمة المرور",
-            style: AppTextStyles.font14BoldBlack,
+            style: AppTextStyles.font14MediumBlack,
           ),
           SizedBox(height: 8.h),
           AppInput(
@@ -42,7 +42,7 @@ class _ForgotPasswordStepThreeState extends State<_ForgotPasswordStepThree> {
           SizedBox(height: 20.h),
           Text(
             "تأكيد كلمة المرور",
-            style: AppTextStyles.font14BoldBlack,
+            style: AppTextStyles.font14MediumBlack,
           ),
           SizedBox(height: 8.h),
           AppInput(

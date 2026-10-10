@@ -75,7 +75,7 @@ class _ProductDetailsInfoContainerState
               SizedBox(width: 6.w),
               Text(
                 "4.8",
-                style: AppTextStyles.font14BoldBlack.copyWith(
+                style: AppTextStyles.font14MediumBlack.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),

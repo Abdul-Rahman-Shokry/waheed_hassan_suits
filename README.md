@@ -199,3 +199,8 @@ flowchart TD
 
 Developed by **Abdul-Rahman Shokry** as part of Growfet training.
 Contributions and feedback are welcome!
+
+---
+
+* private constructor
+* Debouncing in search bar

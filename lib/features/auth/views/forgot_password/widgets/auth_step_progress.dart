@@ -16,7 +16,7 @@ class AuthStepProgress extends StatelessWidget {
       children: [
         Text(
           "خطوة $currentStep / $totalSteps",
-          style: AppTextStyles.font14BoldBlack.copyWith(
+          style: AppTextStyles.font14MediumBlack.copyWith(
             color: const Color(0xFF1F2937),
           ),
         ),

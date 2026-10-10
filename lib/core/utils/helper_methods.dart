@@ -14,7 +14,7 @@ void goTo({required Widget page, bool canPop = true, int? delaySeconds}) {
   }
 
   if (delaySeconds != null) {
-    Timer(const Duration(seconds: 3), () {
+    Timer(Duration(seconds: delaySeconds), () {
       action();
     });
   } else {

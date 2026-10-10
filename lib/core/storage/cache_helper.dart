@@ -4,6 +4,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../features/auth/models/user_model.dart';
 
 class CacheHelper {
+  CacheHelper._();
+
   static late SharedPreferences _prefs;
   static late FlutterSecureStorage _secureStorage;
 

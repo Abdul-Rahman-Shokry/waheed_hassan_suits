@@ -39,7 +39,7 @@ class AppImage extends StatelessWidget {
 
           if (path.isEmpty) return const SizedBox.shrink();
 
-          if (path.contains("com.example.avon/cache")) {
+          if (path.contains("com.example.waheed_hassan_suits/cache")) {
             child = Image.file(
               File(path),
               height: height,

@@ -64,7 +64,7 @@ class _RegisterFormState extends State<_RegisterForm> {
                             context.pushReplacement(AppRouter.login);
                           }
                         },
-                        child: Text("تسجيل دخول", style: AppTextStyles.font14Bold),
+                        child: Text("تسجيل دخول", style: AppTextStyles.font14Medium),
                       ),
                     ),
                   ],

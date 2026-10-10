@@ -21,6 +21,8 @@ import '../../features/splash.dart';
 import '../utils/helper_methods.dart';
 
 class AppRouter {
+  AppRouter._();
+
   static const String splash = '/';
   static const String onBoarding = '/onboarding';
   static const String login = '/login';
@@ -40,7 +42,7 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     navigatorKey: navKey,
-    initialLocation: profile, // splash
+    initialLocation: splash,
     routes: [
       GoRoute(path: splash, builder: (context, state) => const SplashView()),
       GoRoute(

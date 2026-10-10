@@ -1,4 +1,6 @@
 class AppValidators {
+  AppValidators._();
+
   static String? email(String? value) {
     if (value == null || value.trim().isEmpty) {
       return 'Email is required';

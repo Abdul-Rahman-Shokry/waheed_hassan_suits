@@ -125,7 +125,7 @@ class AppProductCard extends StatelessWidget {
                     product.nameAr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: AppTextStyles.font14BoldBlack,
+                    style: AppTextStyles.font14MediumBlack,
                   ),
                   SizedBox(height: 2.h),
                   Text(

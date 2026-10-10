@@ -89,7 +89,7 @@ class _HomeCategoriesSection extends StatelessWidget {
                     child: Text(
                       title,
                       textAlign: TextAlign.center,
-                      style: AppTextStyles.font14BoldBlack,
+                      style: AppTextStyles.font14MediumBlack,
                     ),
                   ),
                   SizedBox(width: 8.w),

@@ -39,7 +39,7 @@ class _ForgotPasswordStepOneState extends State<_ForgotPasswordStepOne> {
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               "البريد الإلكتروني",
-              style: AppTextStyles.font14Bold,
+              style: AppTextStyles.font14Medium,
             ),
           ),
           SizedBox(height: 8.h),

@@ -1,4 +1,6 @@
 class ApiEndpoints {
+  ApiEndpoints._();
+
   static const String baseUrl = 'https://wa7eed.growfet.com';
 
   static const String login = '/api/Account/login';
