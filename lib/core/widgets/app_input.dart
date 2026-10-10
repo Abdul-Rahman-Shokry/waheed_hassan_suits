@@ -11,6 +11,8 @@ class AppInput extends StatefulWidget {
   final bool withCountryCode, isPassword;
   final double? bottomSpace;
   final String? Function(String?)? validator;
+  final TextInputType? keyboardType;
+  final TextDirection? textDirection;
 
   const AppInput({
     super.key,
@@ -19,7 +21,11 @@ class AppInput extends StatefulWidget {
     this.label,
     this.withCountryCode = false,
     this.isPassword = false,
-    this.bottomSpace, this.validator, this.controller,
+    this.bottomSpace,
+    this.validator,
+    this.controller,
+    this.keyboardType,
+    this.textDirection,
   });
 
   @override
@@ -29,17 +35,46 @@ class AppInput extends StatefulWidget {
 class _AppInputState extends State<AppInput> {
   bool isHidden = true;
 
+  bool get _isLtrOnly {
+    if (widget.isPassword || widget.withCountryCode) {
+      return true;
+    }
+
+    final keyboardType = widget.keyboardType;
+    if (keyboardType == TextInputType.emailAddress ||
+        keyboardType == TextInputType.number ||
+        keyboardType == TextInputType.phone) {
+      return true;
+    }
+
+    final hint = widget.hint?.trim() ?? '';
+    final suffix = widget.suffixIcon?.trim() ?? '';
+
+    final isEmail = hint.contains('@') ||
+        hint.toLowerCase().contains('email') ||
+        suffix == 'sms.svg';
+
+    final isNumeric = suffix == 'call.svg' ||
+        (hint.isNotEmpty && RegExp(r'^[0-9+\s-]+$').hasMatch(hint));
+
+    return isEmail || isNumeric;
+  }
+
   @override
   Widget build(BuildContext context) {
+    final effectiveTextDirection = widget.textDirection ??
+        (_isLtrOnly ? TextDirection.ltr : Directionality.of(context));
+
     return Padding(
       padding: EdgeInsets.only(bottom: widget.bottomSpace ?? 16.h),
       child: Row(
         children: [
-          if (widget.withCountryCode) AppCountryCode(),
+          if (widget.withCountryCode) const AppCountryCode(),
           if (widget.withCountryCode) SizedBox(width: 6.w),
           Expanded(
             child: TextFormField(
-              textDirection: TextDirection.ltr,
+              textDirection: effectiveTextDirection,
+              keyboardType: widget.keyboardType,
               validator: widget.validator,
               controller: widget.controller,
               obscureText: widget.isPassword && isHidden,
