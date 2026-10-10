@@ -51,10 +51,15 @@ A modern, scalable Flutter mobile application built for **Waheed Hassan Suits** 
   - Automatic `401 Unauthorized` detection with automatic logout and session clearing.
   - Detailed request/response logging using [pretty_dio_logger](https://pub.dev/packages/pretty_dio_logger) in debug mode.
 
+- **🔎 Debounced Search & Dynamic Filtering**:
+  - Real-time search query debouncing in `HomeCubit` to prevent excessive API calls and ensure fluid UX.
+  - Interactive `FilterBottomSheet` with category chips and price range sliders.
+
 - **🎨 Modern UI & Responsive Layout**:
   - Adaptive screen sizing using [flutter_screenutil](https://pub.dev/packages/flutter_screenutil) (design canvas: `402 x 874`).
   - Full Arabic RTL localization support (`IBMPlexSansArabic` typography).
-  - Custom UI component library (`AppButton`, `AppInput`, `AppImage`, `AppCountryCode`, `AppBack`).
+  - Centralized design tokens via `AppColors` and `AppTextStyles`.
+  - Custom UI component library (`AppButton`, `AppInput`, `AppImage`, `AppCountryCode`, `AppBack`, `AppSearchBar`).
 
 ---
 
@@ -90,8 +95,16 @@ lib/
 
 ### Dependency Injection (Service Locator)
 Dependencies are registered in `lib/core/di/service_locator.dart` using [GetIt](https://pub.dev/packages/get_it):
-- **Singletons**: `DioClient`, `AuthRepository`, `ProfileRepository`
-- **Factories**: `LoginCubit`, `RegisterCubit`, `ForgotPasswordCubit`, `ProfileCubit`
+- **Singletons**: `DioClient`, `AuthRepository`, `ProfileRepository`, `HomeRepository`
+- **Factories**: `LoginCubit`, `RegisterCubit`, `ForgotPasswordCubit`, `ProfileCubit`, `HomeCubit`
+
+### Defensive Design & Private Constructors
+Purely static utilities, token collections, and configuration classes strictly employ private constructors (`ClassName._()`) to prevent unintentional instantiation:
+- `AppRouter._()` — Centralized declarative routing
+- `AppColors._()` — Color palette design tokens
+- `AppTextStyles._()` — Scaled typography tokens
+- `CacheHelper._()` — Secure and preferences storage helper
+- `ApiEndpoints._()` — Network URL constants
 
 ---
 
@@ -199,8 +212,3 @@ flowchart TD
 
 Developed by **Abdul-Rahman Shokry** as part of Growfet training.
 Contributions and feedback are welcome!
-
----
-
-* private constructor
-* Debouncing in search bar
