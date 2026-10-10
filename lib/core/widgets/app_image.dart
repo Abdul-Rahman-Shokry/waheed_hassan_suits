@@ -116,10 +116,27 @@ class AppImage extends StatelessWidget {
   }
 
   Widget _errorWidget() {
+    double size = 24;
+
+    final isWidthFinite = width != null && width!.isFinite;
+    final isHeightFinite = height != null && height!.isFinite;
+
+    if (isWidthFinite && isHeightFinite) {
+      size = width! < height! ? width! : height!;
+    } else if (isWidthFinite) {
+      size = width!;
+    } else if (isHeightFinite) {
+      if (width != null && !isWidthFinite) {
+        size = height! < 24 ? height! : 24;
+      } else {
+        size = height!;
+      }
+    }
+
     return Icon(
       Icons.error_outline_rounded,
       color: Colors.red,
-      size: width ?? height ?? 24,
+      size: size,
     );
   }
 }
