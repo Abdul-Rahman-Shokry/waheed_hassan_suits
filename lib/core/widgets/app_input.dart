@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 
 import 'app_country_code.dart';
 import 'app_image.dart';
@@ -43,6 +44,7 @@ class _AppInputState extends State<AppInput> {
               controller: widget.controller,
               obscureText: widget.isPassword && isHidden,
               decoration: InputDecoration(
+                hintStyle: AppTextStyles.font14RegularGrey,
                 hintText: widget.hint,
                 labelText: widget.label,
                 isDense: true,

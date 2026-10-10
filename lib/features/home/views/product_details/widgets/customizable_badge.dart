@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 
 class CustomizableBadge extends StatelessWidget {
   const CustomizableBadge({super.key});
@@ -24,9 +25,8 @@ class CustomizableBadge extends StatelessWidget {
         children: [
           Text(
             "تفصيل علي المقاس",
-            style: TextStyle(
+            style: AppTextStyles.font11Regular.copyWith(
               color: Colors.white,
-              fontSize: 11.sp,
               fontWeight: FontWeight.w600,
             ),
           ),

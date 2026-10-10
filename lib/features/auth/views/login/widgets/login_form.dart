@@ -35,19 +35,15 @@ class _LoginFormState extends State<_LoginForm> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 "تسجيل دخول",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
+                style: AppTextStyles.font24SemiBold,
               ),
               SizedBox(height: 4.h),
               Text.rich(
                 textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 12.sp),
+                style: AppTextStyles.font14Regular,
                 TextSpan(
                   text: "ليس لديك حساب ؟ ",
                   children: [
@@ -60,13 +56,13 @@ class _LoginFormState extends State<_LoginForm> {
                         onPressed: () {
                           context.pushReplacement(AppRouter.register);
                         },
-                        child: Text("إنشاء حساب جديد"),
+                        child: Text("إنشاء حساب جديد", style: AppTextStyles.font14Bold,),
                       ),
                     ),
                   ],
                 ),
               ),
-              Text("البريد الإلكتروني"),
+              Text("البريد الإلكتروني", style: AppTextStyles.font12Regular,),
               SizedBox(height: 8.h),
               AppInput(
                   hint: "name@example.com",
@@ -76,7 +72,7 @@ class _LoginFormState extends State<_LoginForm> {
                   // validator: AppValidators.email,
                   controller: _emailController
               ),
-              Text("كلمة المرور"),
+              Text("كلمة المرور", style: AppTextStyles.font12Regular,),
               SizedBox(height: 8.h),
               AppInput(
                 hint: "كلمة المرور",
@@ -94,7 +90,7 @@ class _LoginFormState extends State<_LoginForm> {
                     },
                     child: Text(
                       "هل نسيت كلمة المرور ؟",
-                      style: TextStyle(fontSize: 14.sp),
+                      style: AppTextStyles.font12Regular,
                     ),
                   ),
                 ],
@@ -125,9 +121,8 @@ class _LoginFormState extends State<_LoginForm> {
                   SizedBox(width: 12.w),
                   Text(
                     "أو تـــــــابــع بواسطة",
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: Color(0xff939393),
+                    style: AppTextStyles.font12Regular.copyWith(
+                      color: const Color(0xff939393),
                     ),
                   ),
                   SizedBox(width: 12.w),
@@ -154,8 +149,8 @@ class _LoginFormState extends State<_LoginForm> {
                         children: [
                           Text(
                             "Google",
-                            style: TextStyle(
-                              color: Color(0xff0A0A0A),
+                            style: AppTextStyles.font14Regular.copyWith(
+                              color: const Color(0xff0A0A0A),
                               fontSize: 13.sp,
                             ),
                           ),
@@ -183,8 +178,8 @@ class _LoginFormState extends State<_LoginForm> {
                         children: [
                           Text(
                             "Apple",
-                            style: TextStyle(
-                              color: Color(0xff0A0A0A),
+                            style: AppTextStyles.font14Regular.copyWith(
+                              color: const Color(0xff0A0A0A),
                               fontSize: 13.sp,
                             ),
                           ),

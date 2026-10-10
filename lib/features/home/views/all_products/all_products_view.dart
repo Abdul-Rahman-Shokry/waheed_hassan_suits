@@ -8,6 +8,7 @@ import 'package:waheed_hassan_suits/core/routing/app_router.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_product_card.dart';
 import 'package:waheed_hassan_suits/core/widgets/appbar_action_button.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 
 import '../../../../core/widgets/app_back.dart';
 import '../../../../core/widgets/app_search_bar.dart';
@@ -48,11 +49,7 @@ class AllProductsView extends StatelessWidget {
                   ),
                   title: Text(
                     categoryTitle,
-                    style: TextStyle(
-                      fontSize: 18.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                    style: AppTextStyles.font18Bold,
                   ),
                   centerTitle: true,
                   actions: [
@@ -96,8 +93,7 @@ class AllProductsView extends StatelessWidget {
                                   Text(
                                     state.errorMessage ??
                                         "حدث خطأ أثناء تحميل المنتجات",
-                                    style: TextStyle(
-                                      fontSize: 14.sp,
+                                    style: AppTextStyles.font14Regular.copyWith(
                                       color: Colors.red,
                                     ),
                                   ),
@@ -117,10 +113,8 @@ class AllProductsView extends StatelessWidget {
                             return Center(
                               child: Text(
                                 "لا توجد منتجات متاحة حالياً",
-                                style: TextStyle(
-                                  fontSize: 16.sp,
+                                style: AppTextStyles.font16Medium.copyWith(
                                   color: const Color(0xff757575),
-                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             );

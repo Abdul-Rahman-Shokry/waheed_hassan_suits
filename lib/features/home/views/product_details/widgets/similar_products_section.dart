@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_product_card.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import '../../../logic/home_cubit.dart';
 import '../../../logic/home_state.dart';
 
@@ -40,11 +41,7 @@ class SimilarProductsSection extends StatelessWidget {
                     SizedBox(width: 6.w),
                     Text(
                       "منتجات مشابهة",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                      style: AppTextStyles.font16Bold,
                     ),
                   ],
                 ),
@@ -57,9 +54,8 @@ class SimilarProductsSection extends StatelessWidget {
                     children: [
                       Text(
                         "عرض الكل",
-                        style: TextStyle(
+                        style: AppTextStyles.font12Medium.copyWith(
                           fontSize: 13.sp,
-                          fontWeight: FontWeight.w500,
                           color: const Color(0xff757575),
                         ),
                       ),

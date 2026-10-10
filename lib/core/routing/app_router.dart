@@ -40,7 +40,7 @@ class AppRouter {
 
   static final GoRouter router = GoRouter(
     navigatorKey: navKey,
-    initialLocation: splash,
+    initialLocation: profile, // splash
     routes: [
       GoRoute(path: splash, builder: (context, state) => const SplashView()),
       GoRoute(

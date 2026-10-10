@@ -16,7 +16,7 @@ class _ProfileUserHeader extends StatelessWidget {
         Text(
           CacheHelper.fullName,
           maxLines: 1,
-          style: TextStyle(fontSize: 20.sp, fontWeight: FontWeight.bold),
+          style: AppTextStyles.font20Bold,
         ),
       ],
     );

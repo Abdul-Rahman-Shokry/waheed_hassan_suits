@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 
 class ProductDetailsInfoContainer extends StatefulWidget {
   final String productName;
@@ -48,7 +49,7 @@ class _ProductDetailsInfoContainerState
         children: [
           Text(
             "بدلة كلاسيكية",
-            style: TextStyle(
+            style: AppTextStyles.font14Regular.copyWith(
               fontSize: 13.sp,
               fontWeight: FontWeight.w600,
               color: const Color(0xffC59A5A),
@@ -58,11 +59,7 @@ class _ProductDetailsInfoContainerState
           Text(
             widget.productName,
             textAlign: TextAlign.right,
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            style: AppTextStyles.font20Bold,
           ),
           SizedBox(height: 8.h),
           Row(
@@ -70,19 +67,16 @@ class _ProductDetailsInfoContainerState
             children: [
               Text(
                 "(124 تقييم)",
-                style: TextStyle(
+                style: AppTextStyles.font14Regular.copyWith(
                   fontSize: 13.sp,
                   color: const Color(0xff8C8C8C),
-                  fontWeight: FontWeight.w400,
                 ),
               ),
               SizedBox(width: 6.w),
               Text(
                 "4.8",
-                style: TextStyle(
-                  fontSize: 14.sp,
+                style: AppTextStyles.font14BoldBlack.copyWith(
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
                 ),
               ),
               SizedBox(width: 4.w),
@@ -128,16 +122,12 @@ class _ProductDetailsInfoContainerState
           ),
           Text(
             "اللون",
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            style: AppTextStyles.font16Bold,
           ),
           SizedBox(height: 10.h),
           Text(
             _colors[_selectedColorIndex]["name"] as String,
-            style: TextStyle(
+            style: AppTextStyles.font14Regular.copyWith(
               fontSize: 13.sp,
               color: const Color(0xff737373),
               fontWeight: FontWeight.w500,
@@ -187,21 +177,15 @@ class _ProductDetailsInfoContainerState
           ),
           Text(
             "الوصف",
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            style: AppTextStyles.font16Bold,
           ),
           SizedBox(height: 10.h),
           Text(
             widget.productDescription,
             textAlign: TextAlign.right,
-            style: TextStyle(
-              fontSize: 14.sp,
+            style: AppTextStyles.font14Regular.copyWith(
               height: 1.6,
               color: const Color(0xff4A5568),
-              fontWeight: FontWeight.w400,
             ),
           ),
           SizedBox(height: 16.h),
@@ -217,8 +201,7 @@ class _ProductDetailsInfoContainerState
                 ),
                 child: Text(
                   tag,
-                  style: TextStyle(
-                    fontSize: 12.sp,
+                  style: AppTextStyles.font12Medium.copyWith(
                     fontWeight: FontWeight.w600,
                     color: const Color(0xffB58C5A),
                   ),
@@ -246,8 +229,7 @@ class _ProductDetailsInfoContainerState
           Text(
             title,
             textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 12.sp,
+            style: AppTextStyles.font12Medium.copyWith(
               fontWeight: FontWeight.w600,
               color: const Color(0xff2D3748),
             ),

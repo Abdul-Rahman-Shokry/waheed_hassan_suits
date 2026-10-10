@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../theming/app_text_style.dart';
 
 
 class AppCountryCode extends StatefulWidget {
@@ -44,11 +45,7 @@ class _AppCountryCodeState extends State<AppCountryCode> {
               value: e,
               child: Text(
                 e,
-                style: TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14.sp,
-                  color: Color(0xff939393),
-                ),
+                style: AppTextStyles.font14RegularGrey,
               ),
             ),
           )

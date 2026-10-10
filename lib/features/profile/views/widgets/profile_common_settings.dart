@@ -10,11 +10,7 @@ class _ProfileCommonSettings extends StatelessWidget {
       children: [
         Text(
           'الإعدادات',
-          style: TextStyle(
-            fontSize: 16.sp,
-            fontWeight: FontWeight.bold,
-            color: const Color(0xff000000),
-          ),
+          style: AppTextStyles.font16Bold,
         ),
         SizedBox(height: 12.h),
         Container(
@@ -118,20 +114,14 @@ class _ProfileCommonSettings extends StatelessWidget {
             SizedBox(width: 12.w),
             Text(
               title,
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
+              style: AppTextStyles.font16Medium,
             ),
             const Spacer(),
             if (trailingText != null) ...[
               Text(
                 trailingText,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff686868),
+                style: AppTextStyles.font16Regular.copyWith(
+                  color: Color(0xff595959),
                 ),
               ),
               SizedBox(width: 8.w),

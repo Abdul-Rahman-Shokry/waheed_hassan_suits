@@ -25,9 +25,7 @@ class _ForgotPasswordStepTwoState extends State<_ForgotPasswordStepTwo> {
     final defaultPinTheme = PinTheme(
       width: 45.w,
       height: 45.h,
-      textStyle: TextStyle(
-        fontWeight: FontWeight.w700,
-        fontSize: 16.sp,
+      textStyle: AppTextStyles.font16Bold.copyWith(
         color: const Color(0xff434C6D),
       ),
       decoration: BoxDecoration(
@@ -50,19 +48,12 @@ class _ForgotPasswordStepTwoState extends State<_ForgotPasswordStepTwo> {
         SizedBox(height: 12.h),
         Text(
           "رمز التحقق",
-          style: TextStyle(
-            fontSize: 20.sp,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: AppTextStyles.font24Medium,
         ),
         SizedBox(height: 8.h),
         Text(
           "تم إرسال الرمز إلى $email",
-          style: TextStyle(
-            fontSize: 14.sp,
-            color: const Color(0xFF6B7280),
-          ),
+          style: AppTextStyles.font16Regular,
         ),
         SizedBox(height: 32.h),
         Directionality(

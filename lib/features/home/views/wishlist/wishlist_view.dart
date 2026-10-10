@@ -6,6 +6,7 @@ import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_back.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_product_card.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
 import '../widgets/wishlist_message_listener.dart';
@@ -37,11 +38,7 @@ class WishlistView extends StatelessWidget {
             ),
             title: Text(
               "المفضلة",
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+              style: AppTextStyles.font18Bold,
             ),
             centerTitle: true,
           ),
@@ -74,9 +71,7 @@ class WishlistView extends StatelessWidget {
                     SizedBox(height: 16.h),
                     Text(
                       "لا توجد منتجات في المفضلة",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w500,
+                      style: AppTextStyles.font16Medium.copyWith(
                         color: const Color(0xff757575),
                       ),
                     ),

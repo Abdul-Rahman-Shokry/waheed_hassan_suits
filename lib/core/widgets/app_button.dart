@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 
 class AppButton extends StatelessWidget {
@@ -26,9 +27,7 @@ class AppButton extends StatelessWidget {
             onPressed: onPressed ?? (){},
             child: Text(
               text,
-              style: TextStyle(
-                fontSize: 16.sp,
-                fontWeight: FontWeight.w600,
+              style: AppTextStyles.font16SemiBold.copyWith(
                 color: const Color(0xff1F2937),
               ),
             ),
@@ -41,9 +40,7 @@ class AppButton extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 16.sp,
+                  style: AppTextStyles.font16SemiBold.copyWith(
                     color: textColor,
                   ),
                 ),

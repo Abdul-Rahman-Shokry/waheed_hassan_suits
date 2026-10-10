@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'filter_bottom_sheet.dart';
 
 class AppSearchBar extends StatefulWidget {
@@ -70,11 +71,7 @@ class _AppSearchBarState extends State<AppSearchBar> {
                 onTapOutside: (event) {
                   _focusNode.unfocus();
                 },
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w400,
-                ),
+                style: AppTextStyles.font14Regular,
                 decoration: InputDecoration(
                   isDense: true,
                   border: InputBorder.none,
@@ -82,10 +79,8 @@ class _AppSearchBarState extends State<AppSearchBar> {
                   focusedBorder: InputBorder.none,
                   contentPadding: EdgeInsets.zero,
                   hintText: widget.hintText,
-                  hintStyle: TextStyle(
-                    fontSize: 16.sp,
+                  hintStyle: AppTextStyles.font16Regular.copyWith(
                     color: const Color(0xff9E9E9E),
-                    fontWeight: FontWeight.w400,
                   ),
                 ),
               ),

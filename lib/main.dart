@@ -3,6 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:waheed_hassan_suits/core/di/service_locator.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 
 import 'core/storage/cache_helper.dart';
 
@@ -43,18 +44,19 @@ class MyApp extends StatelessWidget {
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             hoverColor: Colors.transparent,
-            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+            bottomNavigationBarTheme: BottomNavigationBarThemeData(
               enableFeedback: false,
+              selectedLabelStyle: AppTextStyles.font14Regular,
+              unselectedLabelStyle: AppTextStyles.font14Regular.copyWith(
+                color: Color(0xff919191),
+              )
             ),
             scaffoldBackgroundColor: Color(0xffF3F3F4),
             filledButtonTheme: FilledButtonThemeData(
               style: FilledButton.styleFrom(
                 backgroundColor: const Color(0xff000000),
                 fixedSize: Size.fromHeight(55.h),
-                textStyle: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14.sp,
-                ),
+                textStyle: AppTextStyles.font14BoldBlack,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(16.r),
                 ),
@@ -71,10 +73,7 @@ class MyApp extends StatelessWidget {
             textButtonTheme: TextButtonThemeData(
               style: TextButton.styleFrom(
                 foregroundColor: const Color(0xff314158),
-                textStyle: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                ),
+                textStyle: AppTextStyles.font14Regular,
               ),
             ),
             inputDecorationTheme: InputDecorationThemeData(
@@ -92,11 +91,7 @@ class MyApp extends StatelessWidget {
                 ),
                 borderRadius: BorderRadius.circular(12.r),
               ),
-              hintStyle: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xff939393),
-              ),
+              hintStyle: AppTextStyles.font14RegularGrey,
             ),
           ),
           debugShowCheckedModeBanner: false,

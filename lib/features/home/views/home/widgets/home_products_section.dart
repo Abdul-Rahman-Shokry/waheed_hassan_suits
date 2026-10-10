@@ -33,7 +33,7 @@ class _HomeProductsSection extends StatelessWidget {
                 children: [
                   Text(
                     state.errorMessage ?? "حدث خطأ أثناء تحميل المنتجات",
-                    style: TextStyle(fontSize: 14.sp, color: Colors.red),
+                    style: AppTextStyles.font14Regular.copyWith(color: Colors.red),
                   ),
                   SizedBox(height: 8.h),
                   IconButton(
@@ -60,21 +60,13 @@ class _HomeProductsSection extends StatelessWidget {
               children: [
                 Text(
                   "أحدث المنتجات",
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
+                  style: AppTextStyles.font16Bold,
                 ),
                 GestureDetector(
                   onTap: onSeeAllTap,
                   child: Text(
                     "عرض المزيد",
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: const Color(0xff314158),
-                    ),
+                    style: AppTextStyles.font12Medium,
                   ),
                 ),
               ],

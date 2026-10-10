@@ -21,17 +21,13 @@ class _ProfileGuestHeader extends StatelessWidget {
           Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text.rich(
-              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.normal),
+              style: AppTextStyles.font16Medium,
               TextSpan(
                 text: "أهلاً بيك في ",
                 children: [
                   TextSpan(
                     text: "وحيد!",
-                    style: TextStyle(
-                      color: const Color(0xff000000),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+                    style: AppTextStyles.font18Bold,
                   ),
                 ],
               ),
@@ -42,10 +38,8 @@ class _ProfileGuestHeader extends StatelessWidget {
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               'هنسهل عليك شراء وتأجير البدَل وملابس المناسبات',
-              style: TextStyle(
-                fontSize: 13.sp,
-                fontWeight: FontWeight.w400,
-                color: const Color(0xff686868),
+              style: AppTextStyles.font12Regular.copyWith(
+                color: Color(0xff292D32)
               ),
             ),
           ),
@@ -83,10 +77,8 @@ class _ProfileGuestHeader extends StatelessWidget {
                   SizedBox(width: 8.w),
                   Text(
                     'تسجيل الدخول / إنشاء حساب',
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                    style: AppTextStyles.font12Regular.copyWith(
+                      color: Color(0xffFFFFFF)
                     ),
                   ),
                 ],

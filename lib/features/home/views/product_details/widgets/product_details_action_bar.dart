@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 
 class ProductDetailsActionBar extends StatelessWidget {
   final double price;
@@ -34,16 +35,12 @@ class ProductDetailsActionBar extends StatelessWidget {
             children: [
               Text(
                 "${finalPrice.toInt()} ج.م",
-                style: TextStyle(
-                  fontSize: 18.sp,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
+                style: AppTextStyles.font18Bold,
               ),
               if (hasDiscount)
                 Text(
                   "${price.toInt()} ج.م",
-                  style: TextStyle(
+                  style: AppTextStyles.font14Regular.copyWith(
                     fontSize: 13.sp,
                     color: const Color(0xff9E9E9E),
                     decoration: TextDecoration.lineThrough,

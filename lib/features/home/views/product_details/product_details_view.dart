@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_back.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import 'package:waheed_hassan_suits/core/widgets/appbar_action_button.dart';
@@ -40,11 +41,7 @@ class ProductDetailsView extends StatelessWidget {
             ),
             title: Text(
               "تفاصيل المنتج",
-              style: TextStyle(
-                fontSize: 18.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+              style: AppTextStyles.font18Bold,
             ),
             centerTitle: true,
             actions: [

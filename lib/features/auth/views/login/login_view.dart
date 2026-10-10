@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/utils/helper_methods.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_button.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';

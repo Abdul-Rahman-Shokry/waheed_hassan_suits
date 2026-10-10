@@ -27,27 +27,19 @@ class _ForgotPasswordStepOneState extends State<_ForgotPasswordStepOne> {
           SizedBox(height: 12.h),
           Text(
             "نسيت كلمة المرور؟",
-            style: TextStyle(
-              fontSize: 20.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            style: AppTextStyles.font24Medium,
           ),
           SizedBox(height: 8.h),
           Text(
             "أدخل بريدك الإلكتروني لإرسال رمز تحقق آمن.",
-            style: TextStyle(fontSize: 14.sp, color: const Color(0xFF6B7280)),
+            style: AppTextStyles.font16Regular,
           ),
           SizedBox(height: 32.h),
           Align(
             alignment: AlignmentDirectional.centerStart,
             child: Text(
               "البريد الإلكتروني",
-              style: TextStyle(
-                fontSize: 14.sp,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xFF1F2937),
-              ),
+              style: AppTextStyles.font14Bold,
             ),
           ),
           SizedBox(height: 8.h),

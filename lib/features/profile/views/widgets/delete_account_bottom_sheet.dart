@@ -73,11 +73,7 @@ class _DeleteAccountBottomSheetState extends State<DeleteAccountBottomSheet> {
             Text(
               "تأكيد حذف الحساب",
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 20.sp,
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
+              style: AppTextStyles.font24SemiBold,
             ),
             SizedBox(height: 8.h),
 
@@ -86,11 +82,8 @@ class _DeleteAccountBottomSheetState extends State<DeleteAccountBottomSheet> {
               child: Text(
                 "سيتم حذف حسابك وجميع بياناتك بشكل نهائي ولا يمكن استعادتها.",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff686868),
-                  height: 1.4,
+                style: AppTextStyles.font16Regular.copyWith(
+                  color: Color(0xff444748)
                 ),
               ),
             ),
@@ -114,11 +107,7 @@ class _DeleteAccountBottomSheetState extends State<DeleteAccountBottomSheet> {
                     Expanded(
                       child: Text(
                         "لقد فهمت أن هذا الإجراء نهائي.",
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xff1F2937),
-                        ),
+                        style: AppTextStyles.font14Regular,
                       ),
                     ),
                     SizedBox(
@@ -147,7 +136,6 @@ class _DeleteAccountBottomSheetState extends State<DeleteAccountBottomSheet> {
             ),
             SizedBox(height: 24.h),
 
-            // Delete Button (حذف الحساب)
             AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               height: 50.h,
@@ -172,9 +160,7 @@ class _DeleteAccountBottomSheetState extends State<DeleteAccountBottomSheet> {
                     : null,
                 child: Text(
                   "حذف الحساب",
-                  style: TextStyle(
-                    fontSize: 16.sp,
-                    fontWeight: FontWeight.w600,
+                  style: AppTextStyles.font16SemiBold.copyWith(
                     color: Colors.white,
                   ),
                 ),
@@ -182,7 +168,6 @@ class _DeleteAccountBottomSheetState extends State<DeleteAccountBottomSheet> {
             ),
             SizedBox(height: 12.h),
 
-            // Cancel Button (إلغاء)
             SizedBox(height: 8.h),
             AppButton(
               text: "إلغاء",

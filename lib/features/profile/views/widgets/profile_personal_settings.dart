@@ -32,7 +32,7 @@ class _ProfilePersonalSettings extends StatelessWidget {
               _buildSettingsTile(
                 svgPath: 'heart.svg',
                 title: 'المفضلة',
-                onTap: () {},
+                onTap: () {context.push(AppRouter.wishlist);},
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
@@ -93,20 +93,14 @@ class _ProfilePersonalSettings extends StatelessWidget {
             SizedBox(width: 12.w),
             Text(
               title,
-              style: TextStyle(
-                fontSize: 15.sp,
-                fontWeight: FontWeight.w500,
-                color: const Color(0xff000000),
-              ),
+              style: AppTextStyles.font16Medium,
             ),
             const Spacer(),
             if (trailingText != null) ...[
               Text(
                 trailingText,
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w400,
-                  color: const Color(0xff686868),
+                style: AppTextStyles.font16Regular.copyWith(
+                  color: Color(0xff595959),
                 ),
               ),
               SizedBox(width: 8.w),

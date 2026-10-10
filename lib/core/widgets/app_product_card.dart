@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import '../../features/home/models/product_model.dart';
 
@@ -110,20 +111,12 @@ class AppProductCard extends StatelessWidget {
                       SizedBox(width: 4.w),
                       Text(
                         product.averageRating.toString(),
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
+                        style: AppTextStyles.font12Regular,
                       ),
                       SizedBox(width: 4.w),
                       Text(
                         "(${product.reviewCount})",
-                        style: TextStyle(
-                          fontSize: 12.sp,
-                          fontWeight: FontWeight.w400,
-                          color: const Color(0xff9E9E9E),
-                        ),
+                        style: AppTextStyles.font10Regular,
                       ),
                     ],
                   ),
@@ -132,31 +125,19 @@ class AppProductCard extends StatelessWidget {
                     product.nameAr,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                    style: AppTextStyles.font14BoldBlack,
                   ),
                   SizedBox(height: 2.h),
                   Text(
                     product.categoryName,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xff757575),
-                    ),
+                    style: AppTextStyles.font11Regular,
                   ),
                   SizedBox(height: 6.h),
                   Text(
                     "${product.price.toInt()} ج.م",
-                    style: TextStyle(
-                      fontSize: 15.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                    style: AppTextStyles.font16Regular,
                   ),
                 ],
               ),

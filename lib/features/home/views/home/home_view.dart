@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/di/service_locator.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_product_card.dart';
 import 'package:waheed_hassan_suits/core/widgets/appbar_action_button.dart';

@@ -41,18 +41,15 @@ class _RegisterFormState extends State<_RegisterForm> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Text(
+              Text(
                 "إنشاء حساب",
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.black,
-                ),
+                style: AppTextStyles.font24SemiBold,
               ),
               SizedBox(height: 4.h),
               Text.rich(
                 textAlign: TextAlign.center,
+                style: AppTextStyles.font14Regular,
                 TextSpan(
                   text: "لديك حساب بالفعل ؟ ",
                   children: [
@@ -67,14 +64,14 @@ class _RegisterFormState extends State<_RegisterForm> {
                             context.pushReplacement(AppRouter.login);
                           }
                         },
-                        child: Text("تسجيل دخول"),
+                        child: Text("تسجيل دخول", style: AppTextStyles.font14Bold),
                       ),
                     ),
                   ],
                 ),
               ),
               SizedBox(height: 16.h),
-              Text("الاسم بالكامل"),
+              Text("الاسم بالكامل", style: AppTextStyles.font12Regular),
               SizedBox(height: 8.h),
               AppInput(
                 hint: "اكتب اسمك بالكامل",
@@ -82,7 +79,7 @@ class _RegisterFormState extends State<_RegisterForm> {
                 bottomSpace: 8.h,
                 controller: _nameController,
               ),
-              Text("رقم الهاتف"),
+              Text("رقم الهاتف", style: AppTextStyles.font12Regular),
               SizedBox(
                 child: Column(
                   children: [
@@ -97,7 +94,7 @@ class _RegisterFormState extends State<_RegisterForm> {
                   ],
                 ),
               ),
-              Text("البريد الإلكتروني"),
+              Text("البريد الإلكتروني", style: AppTextStyles.font12Regular),
               SizedBox(height: 8.h),
               AppInput(
                 hint: "name@example.com",
@@ -105,7 +102,7 @@ class _RegisterFormState extends State<_RegisterForm> {
                 suffixIcon: "sms.svg",
                 controller: _emailController,
               ),
-              Text("كلمة المرور"),
+              Text("كلمة المرور", style: AppTextStyles.font12Regular),
               SizedBox(height: 8.h),
               AppInput(
                 hint: "********",
@@ -113,7 +110,7 @@ class _RegisterFormState extends State<_RegisterForm> {
                 bottomSpace: 8.h,
                 controller: _passwordController,
               ),
-              Text("تأكيد كلمة المرور"),
+              Text("تأكيد كلمة المرور", style: AppTextStyles.font12Regular),
               SizedBox(height: 8.h),
               AppInput(
                 hint: "********",
@@ -150,7 +147,9 @@ class _RegisterFormState extends State<_RegisterForm> {
                   SizedBox(width: 12.w),
                   Text(
                     "أو تـــــــابــع بواسطة",
-                    style: TextStyle(fontSize: 12.sp, color: Color(0xff939393)),
+                    style: AppTextStyles.font12Regular.copyWith(
+                      color: const Color(0xff939393),
+                    ),
                   ),
                   SizedBox(width: 12.w),
                   Expanded(child: Divider()),
@@ -176,8 +175,8 @@ class _RegisterFormState extends State<_RegisterForm> {
                         children: [
                           Text(
                             "Google",
-                            style: TextStyle(
-                              color: Color(0xff0A0A0A),
+                            style: AppTextStyles.font14Regular.copyWith(
+                              color: const Color(0xff0A0A0A),
                               fontSize: 13.sp,
                             ),
                           ),
@@ -205,8 +204,8 @@ class _RegisterFormState extends State<_RegisterForm> {
                         children: [
                           Text(
                             "Apple",
-                            style: TextStyle(
-                              color: Color(0xff0A0A0A),
+                            style: AppTextStyles.font14Regular.copyWith(
+                              color: const Color(0xff0A0A0A),
                               fontSize: 13.sp,
                             ),
                           ),

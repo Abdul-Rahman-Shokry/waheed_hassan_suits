@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_back.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 
 class AllCategoriesView extends StatelessWidget {
   const AllCategoriesView({super.key});
@@ -38,11 +39,7 @@ class AllCategoriesView extends StatelessWidget {
           ),
           title: Text(
             "التصنيفات",
-            style: TextStyle(
-              fontSize: 18.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            style: AppTextStyles.font18Bold,
           ),
           centerTitle: true,
         ),
@@ -93,11 +90,7 @@ class AllCategoriesView extends StatelessWidget {
                       SizedBox(width: 16.w),
                       Text(
                         category.title,
-                        style: TextStyle(
-                          fontSize: 16.sp,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
+                        style: AppTextStyles.font16SemiBold,
                       ),
                     ],
                   ),

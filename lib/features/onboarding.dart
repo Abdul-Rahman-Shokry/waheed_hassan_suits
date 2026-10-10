@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import '../core/routing/app_router.dart';
 import '../core/storage/cache_helper.dart';
 import '../core/widgets/app_button.dart';
@@ -45,24 +46,16 @@ class OnBoardingView extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Text(
+                  Text(
                     "إطلالة تليق بك",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
+                    style: AppTextStyles.font24SemiBold,
                   ),
                   SizedBox(height: 4.h),
-                  const Text(
+                  Text(
                     "تسوّق أو استأجر بدلتك المفضلة بخطوات بسيطة\nوتجربة فاخرة.",
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w400,
-                      color: Color(0xff314158),
-                    ),
+                    style: AppTextStyles.font14RegularBlueGray,
                   ),
                   SizedBox(height: 16.h),
                   AppButton(

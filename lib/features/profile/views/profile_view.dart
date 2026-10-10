@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/storage/cache_helper.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/utils/helper_methods.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_button.dart';
 import 'package:waheed_hassan_suits/features/profile/logic/profile_cubit.dart';
@@ -33,7 +34,7 @@ class ProfileView extends StatelessWidget {
     return BlocProvider(
       create: (context) => sl<ProfileCubit>(),
       child: Scaffold(
-        appBar: AppBar(title: const Text("حسابي"), centerTitle: true),
+        appBar: AppBar(title: Text("حسابي", style: AppTextStyles.font18Medium,), centerTitle: true),
         body: BlocConsumer<ProfileCubit, ProfileState>(
           listener: (context, state) {
             if (state is ProfileLogoutSuccess) {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_button.dart';
 import '../../features/home/logic/home_cubit.dart';
 import '../../features/home/logic/home_state.dart';
@@ -92,19 +93,14 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                         children: [
                           Text(
                             "تصفية المنتجات",
-                            style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black,
-                            ),
+                            style: AppTextStyles.font18Bold,
                           ),
                           SizedBox(height: 4.h),
                           Text(
                             "$activeCount فلتر مفّعل",
-                            style: TextStyle(
+                            style: AppTextStyles.font14Regular.copyWith(
                               fontSize: 13.sp,
                               color: const Color(0xff757575),
-                              fontWeight: FontWeight.w400,
                             ),
                           ),
                         ],
@@ -125,8 +121,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                             children: [
                               Text(
                                 "إعادة التعيين",
-                                style: TextStyle(
-                                  fontSize: 14.sp,
+                                style: AppTextStyles.font14Regular.copyWith(
                                   color: const Color(0xff667085),
                                 ),
                               ),
@@ -147,11 +142,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     alignment: Alignment.centerRight,
                     child: Text(
                       "الأقسام",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                      ),
+                      style: AppTextStyles.font16Bold,
                     ),
                   ),
                   SizedBox(height: 12.h),
@@ -199,9 +190,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
                     alignment: Alignment.centerRight,
                     child: Text(
                       "نطاق السعر",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.bold,
+                      style: AppTextStyles.font16Bold.copyWith(
                         color: const Color(0xff1E293B),
                       ),
                     ),
@@ -291,20 +280,14 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
         children: [
           Text(
             label,
-            style: TextStyle(
-              fontSize: 12.sp,
+            style: AppTextStyles.font12Medium.copyWith(
               color: const Color(0xff64748B),
-              fontWeight: FontWeight.w500,
             ),
           ),
           SizedBox(height: 4.h),
           Text(
             price,
-            style: TextStyle(
-              fontSize: 16.sp,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
+            style: AppTextStyles.font16Bold,
           ),
         ],
       ),
@@ -334,8 +317,7 @@ class _FilterBottomSheetState extends State<FilterBottomSheet> {
         ),
         child: Text(
           title,
-          style: TextStyle(
-            fontSize: 14.sp,
+          style: AppTextStyles.font14BoldBlack.copyWith(
             fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
             color: isSelected ? Colors.white : const Color(0xff4B5563),
           ),

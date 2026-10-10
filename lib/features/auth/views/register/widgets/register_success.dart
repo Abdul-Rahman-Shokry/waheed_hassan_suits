@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
+import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_button.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 
@@ -32,11 +33,7 @@ class RegisterSuccess extends StatelessWidget {
                   ),
                   Text(
                     "تم إنشاء الحساب!",
-                    style: TextStyle(
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+                    style: AppTextStyles.font24Bold,
                   ),
                   SizedBox(height: 8.h),
                   SizedBox(
@@ -44,11 +41,7 @@ class RegisterSuccess extends StatelessWidget {
                     child: Text(
                       "حسابك جاهز الآن، ابدأ باكتشاف تشكيلتنا المميزة من البدل والقمصان.",
                       textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: const Color(0xFF6B7280),
-                        height: 1.4,
-                      ),
+                      style: AppTextStyles.font14RegularBlueGray,
                     ),
                   ),
                   SizedBox(height: 32.h),
