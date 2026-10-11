@@ -108,12 +108,12 @@ class AppRouter {
           final cubit = state.extra as HomeCubit?;
           if (cubit != null) {
             return BlocProvider.value(
-              value: cubit,
+              value: cubit..getWishlist(),
               child: const WishlistView(),
             );
           }
           return BlocProvider(
-            create: (context) => sl<HomeCubit>()..getProducts(),
+            create: (context) => sl<HomeCubit>()..getWishlist(),
             child: const WishlistView(),
           );
         },

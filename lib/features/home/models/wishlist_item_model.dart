@@ -1,3 +1,5 @@
+import 'product_model.dart';
+
 class WishlistItemModel {
   final int id;
   final int productId;
@@ -35,6 +37,19 @@ class WishlistItemModel {
       mainImageUrl: json['mainImageUrl'] ?? '',
       isCustomizable: json['isCustomizable'] ?? false,
       addedAt: json['addedAt'] ?? '',
+    );
+  }
+
+  Data toProduct() {
+    return Data(
+      id: productId,
+      nameAr: productNameAr,
+      nameEn: productNameEn,
+      price: price,
+      discountPrice: discountPrice ?? 0.0,
+      averageRating: averageRating,
+      isCustomizable: isCustomizable,
+      mainImageUrl: mainImageUrl,
     );
   }
 }

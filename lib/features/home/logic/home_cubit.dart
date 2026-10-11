@@ -67,8 +67,7 @@ class HomeCubit extends Cubit<HomeState> {
           products: productModel.data,
         ),
       );
-      await checkWishlistForProducts(productModel.data);
-      await loadWishlistItemIds();
+      await getWishlist();
     } else {
       emit(
         state.copyWith(
@@ -172,31 +171,55 @@ class HomeCubit extends Cubit<HomeState> {
     emit(state.copyWith(favoriteProductIds: updatedFavorites));
   }
 
-  Future<void> loadWishlistItemIds() async {
+  Future<void> getWishlist() async {
+    emit(state.copyWith(wishlistState: DataState.loading));
+
     final response = await _homeRepository.getWishlist();
-    if (!response.isSuccess || response.successData is! Map) return;
+    if (response.isSuccess && response.successData != null) {
+      List rawList = [];
+      if (response.successData is Map) {
+        final map = response.successData as Map;
+        rawList = (map['list'] ?? map['data'] ?? map['items'] ?? []) as List;
+      } else if (response.successData is List) {
+        rawList = response.successData as List;
+      }
 
-    final data = response.successData as Map;
-    final rawList = data['list'] ?? data['data'] ?? data['items'];
-    if (rawList is! List) return;
+      final List<WishlistItemModel> items = [];
+      final updatedItemIds = Map<int, int>.from(state.wishlistItemIds);
+      final updatedFavorites = Set<int>.from(state.favoriteProductIds);
 
-    final updatedItemIds = Map<int, int>.from(state.wishlistItemIds);
-    final updatedFavorites = Set<int>.from(state.favoriteProductIds);
+      for (final item in rawList) {
+        if (item is! Map<String, dynamic> && item is! Map) continue;
+        final wishlistItem = WishlistItemModel.fromJson(
+          Map<String, dynamic>.from(item as Map),
+        );
+        items.add(wishlistItem);
+        if (wishlistItem.productId != 0 && wishlistItem.id != 0) {
+          updatedItemIds[wishlistItem.productId] = wishlistItem.id;
+          updatedFavorites.add(wishlistItem.productId);
+        }
+      }
 
-    for (final item in rawList) {
-      if (item is! Map<String, dynamic>) continue;
-      final wishlistItem = WishlistItemModel.fromJson(item);
-      if (wishlistItem.productId == 0 || wishlistItem.id == 0) continue;
-      updatedItemIds[wishlistItem.productId] = wishlistItem.id;
-      updatedFavorites.add(wishlistItem.productId);
+      emit(
+        state.copyWith(
+          wishlistState: DataState.success,
+          wishlistItems: items,
+          wishlistItemIds: updatedItemIds,
+          favoriteProductIds: updatedFavorites,
+        ),
+      );
+    } else {
+      emit(
+        state.copyWith(
+          wishlistState: DataState.failed,
+          errorMessage: response.errorMsg ?? "حدث خطأ أثناء تحميل المفضلة",
+        ),
+      );
     }
+  }
 
-    emit(
-      state.copyWith(
-        wishlistItemIds: updatedItemIds,
-        favoriteProductIds: updatedFavorites,
-      ),
-    );
+  Future<void> loadWishlistItemIds() async {
+    await getWishlist();
   }
 
   Future<bool> checkProductInWishlist(int productId) async {
@@ -226,6 +249,9 @@ class HomeCubit extends Cubit<HomeState> {
         ..add(wishlistItem.productId);
       final updatedItemIds = Map<int, int>.from(state.wishlistItemIds)
         ..[wishlistItem.productId] = wishlistItem.id;
+      final updatedWishlist = List<WishlistItemModel>.from(state.wishlistItems)
+        ..removeWhere((item) => item.productId == wishlistItem.productId)
+        ..insert(0, wishlistItem);
 
       emit(
         state.copyWith(
@@ -233,6 +259,7 @@ class HomeCubit extends Cubit<HomeState> {
           addToWishlistMessage: "تمت إضافة المنتج إلى المفضلة",
           favoriteProductIds: updatedFavorites,
           wishlistItemIds: updatedItemIds,
+          wishlistItems: updatedWishlist,
         ),
       );
     } else {
@@ -272,6 +299,9 @@ class HomeCubit extends Cubit<HomeState> {
         ..remove(productId);
       final updatedItemIds = Map<int, int>.from(state.wishlistItemIds)
         ..remove(productId);
+      final updatedWishlist = state.wishlistItems
+          .where((item) => item.productId != productId)
+          .toList();
 
       emit(
         state.copyWith(
@@ -279,6 +309,7 @@ class HomeCubit extends Cubit<HomeState> {
           removeFromWishlistMessage: "تمت إزالة المنتج من المفضلة",
           favoriteProductIds: updatedFavorites,
           wishlistItemIds: updatedItemIds,
+          wishlistItems: updatedWishlist,
         ),
       );
     } else {

@@ -4,25 +4,37 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/enums/data_state.dart';
 import 'package:waheed_hassan_suits/core/routing/app_router.dart';
+import 'package:waheed_hassan_suits/core/theming/app_colors.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_back.dart';
 import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
-import '../widgets/app_product_card.dart';
+import '../widgets/wishlist_item_card.dart';
 import '../widgets/wishlist_message_listener.dart';
 
-class WishlistView extends StatelessWidget {
+class WishlistView extends StatefulWidget {
   const WishlistView({super.key});
+
+  @override
+  State<WishlistView> createState() => _WishlistViewState();
+}
+
+class _WishlistViewState extends State<WishlistView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<HomeCubit>().getWishlist();
+  }
 
   @override
   Widget build(BuildContext context) {
     return WishlistMessageListener(
       child: Scaffold(
-        backgroundColor: const Color(0xffF9FAFB),
+        backgroundColor: AppColors.surfaceLight,
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(kToolbarHeight),
           child: AppBar(
-            backgroundColor: Colors.white,
+            backgroundColor: AppColors.surface,
             elevation: 0,
             scrolledUnderElevation: 0,
             leadingWidth: 68.w,
@@ -45,20 +57,43 @@ class WishlistView extends StatelessWidget {
         ),
         body: BlocBuilder<HomeCubit, HomeState>(
           builder: (context, state) {
-            if (state.productsState == DataState.loading &&
-                state.products.isEmpty) {
+            if (state.wishlistState == DataState.loading &&
+                state.wishlistItems.isEmpty) {
               return const Center(
-                child: CircularProgressIndicator(color: Colors.black),
+                child: CircularProgressIndicator(color: AppColors.primary),
               );
             }
 
-            final favoriteProducts = state.products
-                .where(
-                  (product) => state.favoriteProductIds.contains(product.id),
-                )
-                .toList();
+            if (state.wishlistState == DataState.failed &&
+                state.wishlistItems.isEmpty) {
+              return Center(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 24.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        state.errorMessage ?? "حدث خطأ أثناء تحميل المفضلة",
+                        textAlign: TextAlign.center,
+                        style: AppTextStyles.font14Regular.copyWith(
+                          color: AppColors.error,
+                        ),
+                      ),
+                      SizedBox(height: 12.h),
+                      IconButton(
+                        onPressed: () {
+                          context.read<HomeCubit>().getWishlist();
+                        },
+                        icon: const Icon(Icons.refresh_rounded),
+                        iconSize: 28.r,
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            }
 
-            if (favoriteProducts.isEmpty) {
+            if (state.wishlistItems.isEmpty) {
               return Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -66,13 +101,13 @@ class WishlistView extends StatelessWidget {
                     Icon(
                       Icons.favorite_border_rounded,
                       size: 64.r,
-                      color: const Color(0xff9E9E9E),
+                      color: AppColors.lightGray,
                     ),
                     SizedBox(height: 16.h),
                     Text(
                       "لا توجد منتجات في المفضلة",
                       style: AppTextStyles.font16Medium.copyWith(
-                        color: const Color(0xff757575),
+                        color: AppColors.neutralGray,
                       ),
                     ),
                   ],
@@ -80,37 +115,40 @@ class WishlistView extends StatelessWidget {
               );
             }
 
-            return GridView.builder(
-              padding: EdgeInsetsDirectional.symmetric(
-                horizontal: 16.w,
-                vertical: 16.h,
+            return RefreshIndicator(
+              onRefresh: () => context.read<HomeCubit>().getWishlist(),
+              color: AppColors.primary,
+              child: GridView.builder(
+                padding: EdgeInsetsDirectional.symmetric(
+                  horizontal: 16.w,
+                  vertical: 16.h,
+                ),
+                itemCount: state.wishlistItems.length,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16.h,
+                  crossAxisSpacing: 12.w,
+                  mainAxisExtent: 295.h,
+                ),
+                itemBuilder: (context, index) {
+                  final item = state.wishlistItems[index];
+                  return WishlistItemCard(
+                    item: item,
+                    onTap: () {
+                      context.push(
+                        AppRouter.productDetails,
+                        extra: {
+                          'product': item.toProduct(),
+                          'cubit': context.read<HomeCubit>(),
+                        },
+                      );
+                    },
+                    onFavoriteTap: () {
+                      context.read<HomeCubit>().removeFromWishlist(item.productId);
+                    },
+                  );
+                },
               ),
-              itemCount: favoriteProducts.length,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 16.h,
-                crossAxisSpacing: 12.w,
-                mainAxisExtent: 295.h,
-              ),
-              itemBuilder: (context, index) {
-                final product = favoriteProducts[index];
-                return AppProductCard(
-                  product: product,
-                  isFavorite: true,
-                  onTap: () {
-                    context.push(
-                      AppRouter.productDetails,
-                      extra: {
-                        'product': product,
-                        'cubit': context.read<HomeCubit>(),
-                      },
-                    );
-                  },
-                  onFavoriteTap: () {
-                    context.read<HomeCubit>().toggleWishlist(product.id);
-                  },
-                );
-              },
             );
           },
         ),
@@ -118,3 +156,4 @@ class WishlistView extends StatelessWidget {
     );
   }
 }
+

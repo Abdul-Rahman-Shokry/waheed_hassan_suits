@@ -1,6 +1,7 @@
 import '../../../core/enums/data_state.dart';
 import '../models/category_model.dart';
 import '../models/product_model.dart';
+import '../models/wishlist_item_model.dart';
 
 class HomeState {
   final String? searchQuery;
@@ -16,6 +17,8 @@ class HomeState {
   final String? addToWishlistMessage;
   final DataState removeFromWishlistState;
   final String? removeFromWishlistMessage;
+  final DataState wishlistState;
+  final List<WishlistItemModel> wishlistItems;
   final Set<int> favoriteProductIds;
   final Map<int, int> wishlistItemIds;
 
@@ -33,6 +36,8 @@ class HomeState {
     this.addToWishlistMessage,
     this.removeFromWishlistState = DataState.initial,
     this.removeFromWishlistMessage,
+    this.wishlistState = DataState.initial,
+    this.wishlistItems = const [],
     this.favoriteProductIds = const {},
     this.wishlistItemIds = const {},
   });
@@ -54,6 +59,8 @@ class HomeState {
     String? addToWishlistMessage,
     DataState? removeFromWishlistState,
     String? removeFromWishlistMessage,
+    DataState? wishlistState,
+    List<WishlistItemModel>? wishlistItems,
     Set<int>? favoriteProductIds,
     Map<int, int>? wishlistItemIds,
   }) {
@@ -75,6 +82,8 @@ class HomeState {
           removeFromWishlistState ?? this.removeFromWishlistState,
       removeFromWishlistMessage:
           removeFromWishlistMessage ?? this.removeFromWishlistMessage,
+      wishlistState: wishlistState ?? this.wishlistState,
+      wishlistItems: wishlistItems ?? this.wishlistItems,
       favoriteProductIds: favoriteProductIds ?? this.favoriteProductIds,
       wishlistItemIds: wishlistItemIds ?? this.wishlistItemIds,
     );
