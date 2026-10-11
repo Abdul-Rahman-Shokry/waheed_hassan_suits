@@ -65,8 +65,33 @@ class AppRouter {
       GoRoute(
         path: allProducts,
         builder: (context, state) {
-          final title = state.extra as String? ?? "كل المنتجات";
-          return AllProductsView(categoryTitle: title);
+          String title = "كل المنتجات";
+          int? categoryId;
+
+          final extra = state.extra;
+          if (extra is String) {
+            title = extra;
+          } else if (extra is int) {
+            categoryId = extra;
+          } else if (extra is Map<String, dynamic>) {
+            title = (extra['categoryTitle'] ?? extra['title'] ?? extra['nameAr']) as String? ?? "كل المنتجات";
+            categoryId = (extra['categoryId'] ?? extra['id']) as int?;
+          } else if (extra is Map) {
+            title = (extra['categoryTitle'] ?? extra['title'] ?? extra['nameAr'])?.toString() ?? "كل المنتجات";
+            categoryId = (extra['categoryId'] ?? extra['id']) as int?;
+          }
+
+          if (categoryId == null && state.uri.queryParameters['categoryId'] != null) {
+            categoryId = int.tryParse(state.uri.queryParameters['categoryId']!);
+          }
+          if (state.uri.queryParameters['title'] != null) {
+            title = state.uri.queryParameters['title']!;
+          }
+
+          return AllProductsView(
+            categoryTitle: title,
+            categoryId: categoryId,
+          );
         },
       ),
       GoRoute(
