@@ -121,20 +121,30 @@ class HomeCubit extends Cubit<HomeState> {
     );
   }
 
-  Future<void> getCategories() async {
-    if (state.categories.isNotEmpty) return;
+  Future<void> getCategories({bool forceRefresh = false}) async {
+    if (!forceRefresh && state.categories.isNotEmpty) return;
 
     emit(state.copyWith(categoriesState: DataState.loading));
 
     final response = await _homeRepository.getCategories();
 
     if (response.isSuccess && response.successData != null) {
-      final data = response.successData as Map;
-      final rawList = data['list'] ?? data['data'] ?? [];
+      List rawList = [];
+      if (response.successData is Map) {
+        final data = response.successData as Map;
+        rawList = (data['list'] ?? data['data'] ?? data['items'] ?? []) as List;
+      } else if (response.successData is List) {
+        rawList = response.successData as List;
+      }
 
-      final categories = (rawList as List)
-          .map((item) => CategoryModel.fromJson(item as Map<String, dynamic>))
-          .toList();
+      final categories = <CategoryModel>[];
+      for (final item in rawList) {
+        if (item is Map) {
+          categories.add(
+            CategoryModel.fromJson(Map<String, dynamic>.from(item)),
+          );
+        }
+      }
 
       emit(
         state.copyWith(

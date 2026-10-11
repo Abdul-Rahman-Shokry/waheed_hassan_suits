@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:waheed_hassan_suits/core/di/service_locator.dart';
 import 'package:waheed_hassan_suits/features/auth/views/register/widgets/register_success.dart';
 import 'package:waheed_hassan_suits/features/home/logic/home_cubit.dart';
+import 'package:waheed_hassan_suits/features/home/models/category_model.dart';
 import 'package:waheed_hassan_suits/features/home/models/product_model.dart';
 import 'package:waheed_hassan_suits/features/home/views/all_categories/all_categories_view.dart';
 import 'package:waheed_hassan_suits/features/home/views/product_details/product_details_view.dart';
@@ -69,7 +70,12 @@ class AppRouter {
           int? categoryId;
 
           final extra = state.extra;
-          if (extra is String) {
+          if (extra is CategoryModel) {
+            title = extra.displayName.isNotEmpty
+                ? extra.displayName
+                : "كل المنتجات";
+            categoryId = extra.id;
+          } else if (extra is String) {
             title = extra;
           } else if (extra is int) {
             categoryId = extra;
@@ -97,7 +103,17 @@ class AppRouter {
       GoRoute(
         path: allCategories,
         builder: (context, state) {
-          return const AllCategoriesView();
+          final cubit = state.extra as HomeCubit?;
+          if (cubit != null) {
+            return BlocProvider.value(
+              value: cubit..getCategories(),
+              child: const AllCategoriesView(),
+            );
+          }
+          return BlocProvider(
+            create: (context) => sl<HomeCubit>()..getCategories(),
+            child: const AllCategoriesView(),
+          );
         },
       ),
       GoRoute(

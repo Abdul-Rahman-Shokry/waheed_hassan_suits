@@ -2,7 +2,7 @@ part of '../home_view.dart';
 
 class _HomeCategoriesSection extends StatelessWidget {
   final VoidCallback? onSeeAllTap;
-  final ValueChanged<String>? onCategoryTap;
+  final ValueChanged<CategoryModel>? onCategoryTap;
 
   const _HomeCategoriesSection({
     this.onSeeAllTap,
@@ -11,13 +11,6 @@ class _HomeCategoriesSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final categories = [
-      (title: "بدلات", icon: "suit.svg"),
-      (title: "قمصان", icon: "shirt.svg"),
-      (title: "اكسسوارات", icon: "tie.svg"),
-      (title: "أحذية", icon: "shoe.svg"),
-    ];
-
     return Column(
       children: [
         Row(
@@ -37,23 +30,75 @@ class _HomeCategoriesSection extends StatelessWidget {
           ],
         ),
         SizedBox(height: 16.h),
-        GridView.builder(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          padding: EdgeInsets.zero,
-          itemCount: categories.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 12.h,
-            crossAxisSpacing: 12.w,
-            mainAxisExtent: 64.h,
-          ),
-          itemBuilder: (context, index) {
-            final item = categories[index];
-            return _buildCategoryCard(
-              title: item.title,
-              iconPath: item.icon,
-              onTap: () => onCategoryTap?.call(item.title),
+        BlocBuilder<HomeCubit, HomeState>(
+          builder: (context, state) {
+            if (state.categoriesState == DataState.loading &&
+                state.categories.isEmpty) {
+              return SizedBox(
+                height: 140.h,
+                child: const Center(
+                  child: CircularProgressIndicator(color: Colors.black),
+                ),
+              );
+            }
+
+            if (state.categoriesState == DataState.failed &&
+                state.categories.isEmpty) {
+              return Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.h),
+                child: Center(
+                  child: TextButton.icon(
+                    onPressed: () {
+                      context
+                          .read<HomeCubit>()
+                          .getCategories(forceRefresh: true);
+                    },
+                    icon:
+                        const Icon(Icons.refresh_rounded, color: Colors.black),
+                    label: Text(
+                      "تعذر تحميل التصنيفات، اضغط لإعادة المحاولة",
+                      style: AppTextStyles.font12Medium,
+                    ),
+                  ),
+                ),
+              );
+            }
+
+            final categories = state.categories.length > 4
+                ? state.categories.take(4).toList()
+                : state.categories;
+
+            if (categories.isEmpty) {
+              return SizedBox(
+                height: 64.h,
+                child: Center(
+                  child: Text(
+                    "لا توجد تصنيفات حالياً",
+                    style: AppTextStyles.font14MediumBlack,
+                  ),
+                ),
+              );
+            }
+
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              padding: EdgeInsets.zero,
+              itemCount: categories.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12.h,
+                crossAxisSpacing: 12.w,
+                mainAxisExtent: 64.h,
+              ),
+              itemBuilder: (context, index) {
+                final item = categories[index];
+                return _buildCategoryCard(
+                  title: item.displayName,
+                  iconPath: item.displayIcon,
+                  onTap: () => onCategoryTap?.call(item),
+                );
+              },
             );
           },
         ),
@@ -89,6 +134,8 @@ class _HomeCategoriesSection extends StatelessWidget {
                       title,
                       textAlign: TextAlign.center,
                       style: AppTextStyles.font14MediumBlack,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   SizedBox(width: 8.w),
@@ -103,7 +150,7 @@ class _HomeCategoriesSection extends StatelessWidget {
                       ),
                     ),
                     child: Center(
-                      child: AppImage(iconPath, width: 24.r, height: 24.r),
+                      child: _buildCategoryIcon(iconPath),
                     ),
                   ),
                 ],
@@ -113,5 +160,30 @@ class _HomeCategoriesSection extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Widget _buildCategoryIcon(String iconPath) {
+    if (iconPath.startsWith('http')) {
+      return CachedNetworkImage(
+        imageUrl: iconPath,
+        width: 24.r,
+        height: 24.r,
+        fit: BoxFit.contain,
+        placeholder: (context, url) => SizedBox(
+          width: 16.r,
+          height: 16.r,
+          child: const CircularProgressIndicator.adaptive(strokeWidth: 2),
+        ),
+        errorWidget: (context, url, error) => Icon(
+          Icons.category_outlined,
+          size: 20.r,
+          color: Colors.grey,
+        ),
+      );
+    }
+    if (iconPath.isNotEmpty) {
+      return AppImage(iconPath, width: 24.r, height: 24.r);
+    }
+    return Icon(Icons.category_outlined, size: 20.r, color: Colors.grey);
   }
 }

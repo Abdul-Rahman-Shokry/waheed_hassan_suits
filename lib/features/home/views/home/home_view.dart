@@ -9,9 +9,11 @@ import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import 'package:waheed_hassan_suits/core/widgets/appbar_action_button.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_search_bar.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/routing/app_router.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
+import '../../models/category_model.dart';
 import '../../models/product_model.dart';
 import '../widgets/app_product_card.dart';
 import '../widgets/wishlist_message_listener.dart';
@@ -38,7 +40,9 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<HomeCubit>()..getProducts(),
+      create: (context) => sl<HomeCubit>()
+        ..getProducts()
+        ..getCategories(),
       child: WishlistMessageListener(
         child: Builder(
           builder: (context) {
@@ -142,13 +146,13 @@ class _HomeViewState extends State<HomeView> {
                       onSeeAllTap: () {
                         context.push(
                           AppRouter.allCategories,
-                          extra: "كل المنتجات",
+                          extra: context.read<HomeCubit>(),
                         );
                       },
-                      onCategoryTap: (categoryName) {
+                      onCategoryTap: (category) {
                         context.push(
                           AppRouter.allProducts,
-                          extra: categoryName,
+                          extra: category,
                         );
                       },
                     ),
