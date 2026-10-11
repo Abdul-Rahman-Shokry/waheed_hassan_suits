@@ -134,16 +134,16 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: cart,
-                builder: (context, state) => const CartView(),
+                path: orders,
+                builder: (context, state) => const OrdersView(),
               ),
             ],
           ),
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: orders,
-                builder: (context, state) => const OrdersView(),
+                path: cart,
+                builder: (context, state) => const CartView(),
               ),
             ],
           ),
