@@ -5,7 +5,7 @@ import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import '../../models/product_model.dart';
 
 class AppProductCard extends StatelessWidget {
-  final Data product;
+  final ProductData product;
   final bool isFavorite;
   final VoidCallback? onTap;
   final VoidCallback? onFavoriteTap;

@@ -40,8 +40,8 @@ class WishlistItemModel {
     );
   }
 
-  Data toProduct() {
-    return Data(
+  ProductData toProduct() {
+    return ProductData(
       id: productId,
       nameAr: productNameAr,
       nameEn: productNameEn,

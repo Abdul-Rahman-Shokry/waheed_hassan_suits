@@ -1,14 +1,14 @@
 class ProductModel {
-  late final List<Data> data;
+  late final List<ProductData> data;
 
   ProductModel.fromJson(Map<String, dynamic> json) {
     data = json['data'] != null
-        ? List.from(json['data']).map((e) => Data.fromJson(e)).toList()
+        ? List.from(json['data']).map((e) => ProductData.fromJson(e)).toList()
         : [];
   }
 }
 
-class Data {
+class ProductData {
   final int id;
   final String nameAr;
   final String nameEn;
@@ -23,7 +23,7 @@ class Data {
   final List<Images> images;
   final List<ProductColors> colors;
 
-  Data({
+  ProductData({
     required this.id,
     required this.nameAr,
     this.nameEn = '',
@@ -39,7 +39,7 @@ class Data {
     this.colors = const [],
   });
 
-  Data.fromJson(Map<String, dynamic> json)
+  ProductData.fromJson(Map<String, dynamic> json)
       : id = json['id'] ?? 0,
         nameAr = json['nameAr'] ?? '',
         nameEn = json['nameEn'] ?? '',
@@ -66,6 +66,12 @@ class Images {
   late final String imageUrl;
   late final bool isMain;
 
+  Images({
+    this.id = 0,
+    this.imageUrl = '',
+    this.isMain = false,
+  });
+
   Images.fromJson(Map<String, dynamic> json) {
     id = json['id'] ?? 0;
     imageUrl = json['imageUrl'] ?? '';
@@ -77,8 +83,16 @@ class ProductColors {
   late final String colorNameAr;
   late final String colorHex;
 
+  ProductColors({
+    this.colorNameAr = '',
+    this.colorHex = '',
+  });
+
   ProductColors.fromJson(Map<String, dynamic> json) {
     colorNameAr = json['colorNameAr'] ?? '';
     colorHex = json['colorHex'] ?? '';
   }
 }
+
+/// Backwards compatibility alias
+typedef Data = ProductData;

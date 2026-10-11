@@ -6,7 +6,7 @@ import '../models/wishlist_item_model.dart';
 class HomeState {
   final String? searchQuery;
   final DataState productsState;
-  final List<Data> products;
+  final List<ProductData> products;
   final String? errorMessage;
   final DataState categoriesState;
   final List<CategoryModel> categories;
@@ -46,7 +46,7 @@ class HomeState {
     String? searchQuery,
     bool clearSearch = false,
     DataState? productsState,
-    List<Data>? products,
+    List<ProductData>? products,
     String? errorMessage,
     DataState? categoriesState,
     List<CategoryModel>? categories,

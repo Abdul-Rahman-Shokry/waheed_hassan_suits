@@ -2,8 +2,8 @@ part of '../home_view.dart';
 
 class _HomeProductsSection extends StatelessWidget {
   final VoidCallback? onSeeAllTap;
-  final ValueChanged<Data>? onProductTap;
-  final ValueChanged<Data>? onFavoriteTap;
+  final ValueChanged<ProductData>? onProductTap;
+  final ValueChanged<ProductData>? onFavoriteTap;
 
   const _HomeProductsSection({
     this.onSeeAllTap,

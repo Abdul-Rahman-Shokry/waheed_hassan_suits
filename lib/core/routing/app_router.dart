@@ -120,14 +120,14 @@ class AppRouter {
         path: productDetails,
         builder: (context, state) {
           final extraData = state.extra;
-          Data product;
+          ProductData product;
           HomeCubit? cubit;
 
           if (extraData is Map<String, dynamic>) {
-            product = extraData['product'] as Data;
+            product = extraData['product'] as ProductData;
             cubit = extraData['cubit'] as HomeCubit?;
           } else {
-            product = extraData as Data;
+            product = extraData as ProductData;
           }
 
           if (cubit != null) {

@@ -158,7 +158,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   /// Syncs wishlist state using a single `/api/Wishlist` response instead of N+1 individual checks.
-  Future<void> checkWishlistForProducts([List<Data>? products]) async {
+  Future<void> checkWishlistForProducts([List<ProductData>? products]) async {
     await getWishlist();
   }
 

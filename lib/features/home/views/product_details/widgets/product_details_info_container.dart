@@ -1,16 +1,44 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
+import 'package:waheed_hassan_suits/features/home/models/product_model.dart';
 
 class ProductDetailsInfoContainer extends StatefulWidget {
   final String productName;
   final String productDescription;
+  final String categoryName;
+  final double averageRating;
+  final int reviewCount;
+  final List<ProductColors> colors;
+  final ValueChanged<ProductColors>? onColorSelected;
 
   const ProductDetailsInfoContainer({
     super.key,
     required this.productName,
     required this.productDescription,
+    this.categoryName = '',
+    this.averageRating = 0.0,
+    this.reviewCount = 0,
+    this.colors = const [],
+    this.onColorSelected,
   });
+
+  factory ProductDetailsInfoContainer.fromProduct({
+    Key? key,
+    required ProductData product,
+    ValueChanged<ProductColors>? onColorSelected,
+  }) {
+    return ProductDetailsInfoContainer(
+      key: key,
+      productName: product.nameAr,
+      productDescription: product.descriptionAr,
+      categoryName: product.categoryName,
+      averageRating: product.averageRating,
+      reviewCount: product.reviewCount,
+      colors: product.colors,
+      onColorSelected: onColorSelected,
+    );
+  }
 
   @override
   State<ProductDetailsInfoContainer> createState() =>
@@ -21,11 +49,11 @@ class _ProductDetailsInfoContainerState
     extends State<ProductDetailsInfoContainer> {
   int _selectedColorIndex = 0;
 
-  final List<Map<String, dynamic>> _colors = [
-    {"name": "رصاصي داكن", "color": const Color(0xff39414B)},
-    {"name": "كحلي", "color": const Color(0xff1C2852)},
-    {"name": "أسود", "color": const Color(0xff1A1A1A)},
-    {"name": "بيج", "color": const Color(0xffC6B299)},
+  static final List<ProductColors> _fallbackColors = [
+    ProductColors(colorNameAr: "رصاصي داكن", colorHex: "#39414B"),
+    ProductColors(colorNameAr: "كحلي", colorHex: "#1C2852"),
+    ProductColors(colorNameAr: "أسود", colorHex: "#1A1A1A"),
+    ProductColors(colorNameAr: "بيج", colorHex: "#C6B299"),
   ];
 
   final List<String> _featuresTags = [
@@ -34,8 +62,38 @@ class _ProductDetailsInfoContainerState
     "قصة سليم فيت",
   ];
 
+  List<ProductColors> get _effectiveColors =>
+      widget.colors.isNotEmpty ? widget.colors : _fallbackColors;
+
+  int get _safeSelectedColorIndex {
+    if (_effectiveColors.isEmpty) return 0;
+    if (_selectedColorIndex >= _effectiveColors.length) return 0;
+    return _selectedColorIndex;
+  }
+
+  Color _parseColor(String hex) {
+    try {
+      String cleanHex = hex.replaceAll("#", "").trim();
+      if (cleanHex.startsWith("0x") || cleanHex.startsWith("0X")) {
+        cleanHex = cleanHex.substring(2);
+      }
+      if (cleanHex.length == 6) {
+        cleanHex = "FF$cleanHex";
+      }
+      if (cleanHex.length == 8) {
+        return Color(int.parse("0x$cleanHex"));
+      }
+    } catch (_) {}
+    return const Color(0xff1A1A1A);
+  }
+
   @override
   Widget build(BuildContext context) {
+    final colorsList = _effectiveColors;
+    final selectedIndex = _safeSelectedColorIndex;
+    final selectedColor =
+        colorsList.isNotEmpty ? colorsList[selectedIndex] : null;
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 20.h),
@@ -48,7 +106,9 @@ class _ProductDetailsInfoContainerState
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            "بدلة كلاسيكية",
+            widget.categoryName.isNotEmpty
+                ? widget.categoryName
+                : "بدلة كلاسيكية",
             style: AppTextStyles.font14Regular.copyWith(
               fontSize: 13.sp,
               fontWeight: FontWeight.w600,
@@ -66,7 +126,7 @@ class _ProductDetailsInfoContainerState
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Text(
-                "(124 تقييم)",
+                "(${widget.reviewCount} تقييم)",
                 style: AppTextStyles.font14Regular.copyWith(
                   fontSize: 13.sp,
                   color: const Color(0xff8C8C8C),
@@ -74,7 +134,7 @@ class _ProductDetailsInfoContainerState
               ),
               SizedBox(width: 6.w),
               Text(
-                "4.8",
+                widget.averageRating.toStringAsFixed(1),
                 style: AppTextStyles.font14MediumBlack.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -120,68 +180,88 @@ class _ProductDetailsInfoContainerState
               height: 1,
             ),
           ),
-          Text(
-            "اللون",
-            style: AppTextStyles.font16Bold,
-          ),
-          SizedBox(height: 10.h),
-          Text(
-            _colors[_selectedColorIndex]["name"] as String,
-            style: AppTextStyles.font14Regular.copyWith(
-              fontSize: 13.sp,
-              color: const Color(0xff737373),
-              fontWeight: FontWeight.w500,
+          if (colorsList.isNotEmpty) ...[
+            Text(
+              "اللون",
+              style: AppTextStyles.font16Bold,
             ),
-          ),
-          SizedBox(height: 14.h),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: List.generate(_colors.length, (index) {
-              final isSelected = _selectedColorIndex == index;
-              final color = _colors[index]["color"] as Color;
-
-              return GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _selectedColorIndex = index;
-                  });
-                },
-                child: Container(
-                  margin: EdgeInsetsDirectional.only(start: 12.w),
-                  width: 42.r,
-                  height: 42.r,
-                  decoration: BoxDecoration(
-                    color: color,
-                    shape: BoxShape.circle,
-                  ),
-                  child: isSelected
-                      ? const Center(
-                          child: Icon(
-                            Icons.check_rounded,
-                            color: Colors.white,
-                            size: 22,
-                          ),
-                        )
-                      : null,
+            SizedBox(height: 10.h),
+            if (selectedColor != null && selectedColor.colorNameAr.isNotEmpty)
+              Text(
+                selectedColor.colorNameAr,
+                style: AppTextStyles.font14Regular.copyWith(
+                  fontSize: 13.sp,
+                  color: const Color(0xff737373),
+                  fontWeight: FontWeight.w500,
                 ),
-              );
-            }),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 20.h),
-            child: const Divider(
-              color: Color(0xffF2F2F2),
-              thickness: 1,
-              height: 1,
+              ),
+            SizedBox(height: 14.h),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: List.generate(colorsList.length, (index) {
+                final isSelected = selectedIndex == index;
+                final colorItem = colorsList[index];
+                final color = _parseColor(colorItem.colorHex);
+                final checkColor =
+                    ThemeData.estimateBrightnessForColor(color) ==
+                            Brightness.dark
+                        ? Colors.white
+                        : Colors.black;
+
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      _selectedColorIndex = index;
+                    });
+                    widget.onColorSelected?.call(colorItem);
+                  },
+                  child: Container(
+                    margin: EdgeInsetsDirectional.only(
+                      start: index == 0 ? 0 : 12.w,
+                    ),
+                    width: 42.r,
+                    height: 42.r,
+                    decoration: BoxDecoration(
+                      color: color,
+                      shape: BoxShape.circle,
+                      border: Border.all(
+                        color: isSelected
+                            ? const Color(0xff000000)
+                            : const Color(0xffE0E0E0),
+                        width: isSelected ? 2.w : 1.w,
+                      ),
+                    ),
+                    child: isSelected
+                        ? Center(
+                            child: Icon(
+                              Icons.check_rounded,
+                              color: checkColor,
+                              size: 22.r,
+                            ),
+                          )
+                        : null,
+                  ),
+                );
+              }),
             ),
-          ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h),
+              child: const Divider(
+                color: Color(0xffF2F2F2),
+                thickness: 1,
+                height: 1,
+              ),
+            ),
+          ],
           Text(
             "الوصف",
             style: AppTextStyles.font16Bold,
           ),
           SizedBox(height: 10.h),
           Text(
-            widget.productDescription,
+            widget.productDescription.isNotEmpty
+                ? widget.productDescription
+                : "لا يوجد وصف متوفر لهذا المنتج حالياً.",
             textAlign: TextAlign.right,
             style: AppTextStyles.font14Regular.copyWith(
               height: 1.6,

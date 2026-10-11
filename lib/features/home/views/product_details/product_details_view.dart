@@ -13,7 +13,7 @@ import 'package:waheed_hassan_suits/features/home/views/product_details/widgets/
 import 'package:waheed_hassan_suits/features/home/views/widgets/wishlist_message_listener.dart';
 
 class ProductDetailsView extends StatelessWidget {
-  final Data product;
+  final ProductData product;
 
   const ProductDetailsView({super.key, required this.product});
 
@@ -73,6 +73,10 @@ class ProductDetailsView extends StatelessWidget {
                 ProductDetailsInfoContainer(
                   productName: product.nameAr,
                   productDescription: product.descriptionAr,
+                  categoryName: product.categoryName,
+                  averageRating: product.averageRating,
+                  reviewCount: product.reviewCount,
+                  colors: product.colors,
                 ),
                 SizedBox(height: 16.h),
                 const SimilarProductsSection(),
