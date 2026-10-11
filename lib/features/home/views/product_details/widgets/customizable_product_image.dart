@@ -28,28 +28,12 @@ class CustomizableProductImage extends StatelessWidget {
           SizedBox(
             width: width ?? double.infinity,
             height: height ?? 280.h,
-            child: imageUrl.startsWith('http')
-                ? Image.network(
-                    imageUrl,
-                    width: double.infinity,
-                    height: height ?? 280.h,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: const Color(0xffF0F0F0),
-                      child: const Center(
-                        child: Icon(
-                          Icons.broken_image_rounded,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ),
-                  )
-                : AppImage(
-                    imageUrl,
-                    width: double.infinity,
-                    height: height ?? 280.h,
-                    fit: BoxFit.cover,
-                  ),
+            child: AppImage(
+              imageUrl,
+              width: double.infinity,
+              height: height ?? 280.h,
+              fit: BoxFit.cover,
+            ),
           ),
           if (isCustomizable)
             Positioned(

@@ -40,25 +40,7 @@ class AppProductCard extends StatelessWidget {
                   borderRadius: BorderRadius.vertical(
                     top: Radius.circular(15.r),
                   ),
-                  child: product.mainImageUrl.startsWith('http')
-                      ? Image.network(
-                    product.mainImageUrl,
-                    width: double.infinity,
-                    height: 175.h,
-                    fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) =>
-                        Container(
-                          height: 175.h,
-                          color: const Color(0xffF0F0F0),
-                          child: const Center(
-                            child: Icon(
-                              Icons.broken_image_rounded,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
-                  )
-                      : AppImage(
+                  child: AppImage(
                     product.mainImageUrl,
                     width: double.infinity,
                     height: 175.h,

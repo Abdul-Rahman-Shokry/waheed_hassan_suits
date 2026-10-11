@@ -163,26 +163,13 @@ class _HomeCategoriesSection extends StatelessWidget {
   }
 
   Widget _buildCategoryIcon(String iconPath) {
-    if (iconPath.startsWith('http')) {
-      return CachedNetworkImage(
-        imageUrl: iconPath,
+    if (iconPath.isNotEmpty) {
+      return AppImage(
+        iconPath,
         width: 24.r,
         height: 24.r,
         fit: BoxFit.contain,
-        placeholder: (context, url) => SizedBox(
-          width: 16.r,
-          height: 16.r,
-          child: const CircularProgressIndicator.adaptive(strokeWidth: 2),
-        ),
-        errorWidget: (context, url, error) => Icon(
-          Icons.category_outlined,
-          size: 20.r,
-          color: Colors.grey,
-        ),
       );
-    }
-    if (iconPath.isNotEmpty) {
-      return AppImage(iconPath, width: 24.r, height: 24.r);
     }
     return Icon(Icons.category_outlined, size: 20.r, color: Colors.grey);
   }

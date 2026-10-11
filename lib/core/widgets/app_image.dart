@@ -48,6 +48,41 @@ class AppImage extends StatelessWidget {
               color: color,
               errorBuilder: (context, error, stackTrace) => _errorWidget(),
             );
+          } else if (path.startsWith("http://") || path.startsWith("https://")) {
+            if (path.endsWith(".svg")) {
+              child = SvgPicture.network(
+                path,
+                height: height,
+                width: width,
+                fit: myFit,
+                colorFilter: color != null
+                    ? ColorFilter.mode(color!, BlendMode.srcIn)
+                    : null,
+                placeholderBuilder: (context) => SizedBox(
+                  height: height ?? 24,
+                  width: width ?? 24,
+                  child: const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                ),
+              );
+            } else {
+              child = CachedNetworkImage(
+                imageUrl: path,
+                height: height,
+                width: width,
+                fit: myFit,
+                color: color,
+                placeholder: (context, url) => SizedBox(
+                  height: height ?? 24,
+                  width: width ?? 24,
+                  child: const Center(
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                ),
+                errorWidget: (context, url, error) => _errorWidget(),
+              );
+            }
           } else if (path.endsWith("svg")) {
             child = FutureBuilder(
               future: DefaultAssetBundle.of(context).load("assets/svg/$path"),
@@ -68,22 +103,6 @@ class AppImage extends StatelessWidget {
                       : null,
                 );
               },
-            );
-          } else if (path.startsWith("http")) {
-            child = CachedNetworkImage(
-              imageUrl: path,
-              height: height,
-              width: width,
-              fit: myFit,
-              color: color,
-              placeholder: (context, url) => SizedBox(
-                height: height ?? 24,
-                width: width ?? 24,
-                child: const Center(
-                  child: CircularProgressIndicator.adaptive(),
-                ),
-              ),
-              errorWidget: (context, url, error) => _errorWidget(),
             );
           } else if (path.endsWith("png") || path.endsWith("jpg")) {
             child = Image.asset(
@@ -133,10 +152,17 @@ class AppImage extends StatelessWidget {
       }
     }
 
-    return Icon(
-      Icons.error_outline_rounded,
-      color: Colors.red,
-      size: size,
+    return Container(
+      height: height,
+      width: width,
+      color: const Color(0xffF0F0F0),
+      child: Center(
+        child: Icon(
+          Icons.broken_image_rounded,
+          color: const Color(0xff9E9E9E),
+          size: size > 48 ? 32 : (size > 20 ? 20 : size),
+        ),
+      ),
     );
   }
 }

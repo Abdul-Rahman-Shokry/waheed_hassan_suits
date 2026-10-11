@@ -9,7 +9,6 @@ import 'package:waheed_hassan_suits/core/theming/app_text_style.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_image.dart';
 import 'package:waheed_hassan_suits/core/widgets/appbar_action_button.dart';
 import 'package:waheed_hassan_suits/core/widgets/app_search_bar.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import '../../../../core/routing/app_router.dart';
 import '../../logic/home_cubit.dart';
 import '../../logic/home_state.dart';
