@@ -6,7 +6,6 @@ class _HomeProductsSection extends StatelessWidget {
   final ValueChanged<Data>? onFavoriteTap;
 
   const _HomeProductsSection({
-    super.key,
     this.onSeeAllTap,
     this.onProductTap,
     this.onFavoriteTap,

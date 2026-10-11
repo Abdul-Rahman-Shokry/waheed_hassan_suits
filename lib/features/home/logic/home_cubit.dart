@@ -147,28 +147,9 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  Future<void> checkWishlistForProducts(List<Data> products) async {
-    if (products.isEmpty) return;
-
-    final checkResponses = await Future.wait(
-      products.map((product) => _homeRepository.checkWishlist(product.id)),
-    );
-
-    final updatedFavorites = Set<int>.from(state.favoriteProductIds);
-
-    for (int i = 0; i < products.length; i++) {
-      final res = checkResponses[i];
-      if (res.isSuccess && res.successData != null) {
-        final bool isInWishlist = res.successData['isInWishlist'] ?? false;
-        if (isInWishlist) {
-          updatedFavorites.add(products[i].id);
-        } else {
-          updatedFavorites.remove(products[i].id);
-        }
-      }
-    }
-
-    emit(state.copyWith(favoriteProductIds: updatedFavorites));
+  /// Syncs wishlist state using a single `/api/Wishlist` response instead of N+1 individual checks.
+  Future<void> checkWishlistForProducts([List<Data>? products]) async {
+    await getWishlist();
   }
 
   Future<void> getWishlist() async {
@@ -185,8 +166,8 @@ class HomeCubit extends Cubit<HomeState> {
       }
 
       final List<WishlistItemModel> items = [];
-      final updatedItemIds = Map<int, int>.from(state.wishlistItemIds);
-      final updatedFavorites = Set<int>.from(state.favoriteProductIds);
+      final updatedItemIds = <int, int>{};
+      final updatedFavorites = <int>{};
 
       for (final item in rawList) {
         if (item is! Map<String, dynamic> && item is! Map) continue;

@@ -5,7 +5,6 @@ class _HomeCategoriesSection extends StatelessWidget {
   final ValueChanged<String>? onCategoryTap;
 
   const _HomeCategoriesSection({
-    super.key,
     this.onSeeAllTap,
     this.onCategoryTap,
   });
